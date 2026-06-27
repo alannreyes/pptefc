@@ -39,7 +39,9 @@ Abrí Claude Code en la carpeta donde querés el deck y decí, por ejemplo:
 Claude lee tus archivos, pregunta lo necesario, genera el `index.html` **auto-contenido**, aplica el
 lint de tono, muestra preview, itera contigo, y genera el PDF. Después adjuntás el HTML (o el PDF) al correo.
 
-Ver `examples/minera-ejemplo/` para un deck de muestra (cliente y datos ficticios).
+Ejemplos incluidos (cliente y datos ficticios):
+- `examples/minera-ejemplo/` — deck simple, **HTML auto-contenido de un solo archivo** (emailable).
+- `examples/minera-ejemplo-completo/` — deck **image-forward**: video de fondo, galería de escenas, panel de marcas y logos. Se comparte como **carpeta** (HTML + assets/), zippeable.
 
 ---
 
