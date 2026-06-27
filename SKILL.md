@@ -136,15 +136,27 @@ Antes de generar, **contar las palabras del slide más cargado**. Si supera 60 t
 
 ## Componentes disponibles (`design-system/deck.css`)
 
-Topbar progress · slide counter «X/N» · chapter rail (si ≥2 capítulos) · `.kpi-grid` ·
-`.compare-table` (versus) · `.pillars` · `.quote-slide` (apertura/cierre con cita ancla) ·
-`.principles` (2 frentes verde+naranja) · `.axes` (2×2) · `.team-row`/`.closing-team` ·
-`.donut-svg` (8 wedges) · `.has-opesp` (grid fit-to-viewport) · `.value-chain` · `.sinergia`.
+🔴 **Usá los nombres de clase EXACTOS de `deck.css` — no inventes.** Antes de autorar, mirá
+`examples/minera-ejemplo/index.html` como referencia de markup correcto. Los componentes reales son:
+
+| Componente | Markup canónico |
+|---|---|
+| **Escala de título** | `<h1 class="titanic">` (portada) · `<h2 class="big">` / `class="huge">` (sección). La clase funciona en cualquier heading (h1..h4). |
+| **Bajada / cuerpo** | `<p class="lede">` (bajada grande) · `<p class="body">` |
+| **KPIs** (números grandes) | `<div class="kpi-grid"><div class="kpi"><div class="v">8 <small>líneas</small></div><div class="l">Etiqueta</div></div>…</div>` — **es `.kpi .v` y `.kpi .l`, NO `.kpi-val`/`.kpi-label`**. Grid = 4 col; para 3, `style="grid-template-columns:repeat(3,1fr)"`. |
+| **Tarjetas glass** | `<div class="cards"><div class="card"><div class="tag">…</div><h3>…</h3><p>…</p></div>…</div>` (`.card.orange` para acento) |
+| **Lista de prioridades** | `<ul class="big"><li><span class="n">01</span> Texto…</li>…</ul>` |
+| **Cierre / próximos pasos** | `<div class="next-list"><div class="next-step"><div class="n">1</div><div><h4>…</h4><p>…</p></div></div>…</div>` |
+| **Cita ancla** (apertura/cierre) | `.quote-slide` (blockquote + attribution) |
+| **Otros** | `.versus`/`.compare` · `.principles`/`.principle` (2 frentes) · `.axes`/`.axis` (2×2) · `.moments` · `.hitos` · `.curves` · `.ask` · `.value-chain` · `.stack` |
+
+Color: `<span class="green">` (acento EFC) · `.orange` (cliente/producto) · `.muted`/`.dim`.
 
 **Reglas de forma duras:**
+- 🔴 **Llená el espacio.** El `.slide` centra vertical por defecto (`justify-content:center`) — NO dejes un bloque chico arriba con vacío abajo. Si un slide queda muy vacío: subí la tipografía, agregá sustancia, o usá un layout que ocupe. (`.slide.top` solo si de verdad necesitás anclar arriba.)
+- 🔴 **Tamaño mínimo legible (pantalla 50"+):** títulos de sección con `.big`/`.huge` (no `<h2>` pelado, que sale ~24px) · body ≥15px (`--t-body`) · eyebrows ≥13px · labels ≥12px. Nada <12px (salvo `@media (max-width:600px)`).
 - 🔴 La media query mobile (`@media (max-width:900px)`) va **al FINAL del CSS** (gana por orden).
-- 🔴 **Pantalla 50"+**: body ≥15px, eyebrows ≥13px, labels ≥12px. Nada <12px (excepto `@media (max-width:600px)`).
-- 🟢 Cards padding ≥1.6rem · bullets ≥1rem · si el slide tiene mucho, **subir** el H1, no bajarlo.
+- 🟢 Cards padding ≥1.6rem · bullets ≥1rem · si el slide tiene mucho, **subí** el título, no lo bajes.
 - 🟡 Abrir y cerrar el deck con `.quote-slide` (citas ancla) da peso institucional.
 
 ---

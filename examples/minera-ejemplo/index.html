@@ -189,8 +189,10 @@ body { height: 100%; overflow-x: hidden; }
   scroll-snap-align: start;
   padding: 7vh 8vw;
   display: flex; flex-direction: column;
+  justify-content: center;   /* centrado vertical por defecto: el contenido LLENA el alto, sin vacío arriba/abajo */
   overflow: hidden;
 }
+.slide.top    { justify-content: flex-start; }  /* override: anclar arriba si un slide lo necesita */
 .slide.center { justify-content: center; }
 .slide.bottom { justify-content: flex-end; }
 
@@ -267,17 +269,19 @@ p.lede, p.body, .eyebrow, ul.big li { text-shadow: var(--text-shadow-l); }
 }
 
 /* ── Tipografía ──────────────────────────────────────────────────────────── */
-h1.titanic {
+/* Escala tipográfica por CLASE en headings (h1..h4) — no atada solo a h1.
+   Acotado con :is(...) para NO chocar con ul.big (lista grande). */
+:is(h1,h2,h3,h4).titanic {
   font-size: var(--t-titanic);
   font-weight: 800; line-height: 0.95; letter-spacing: -0.03em;
   margin-bottom: var(--sp-6);
 }
-h1.huge {
+:is(h1,h2,h3,h4).huge {
   font-size: var(--t-huge);
   font-weight: 800; line-height: 1.0; letter-spacing: -0.025em;
   margin-bottom: var(--sp-5);
 }
-h1.big {
+:is(h1,h2,h3,h4).big {
   font-size: var(--t-big);
   font-weight: 700; line-height: 1.05; letter-spacing: -0.02em;
   margin-bottom: var(--sp-5);
@@ -1203,8 +1207,8 @@ ul.big li .n {
   .brand > span:last-child { display: none; }
 
   /* H1 reducidos para mobile */
-  h1.titanic        { font-size: 2.4rem; line-height: 1.1; }
-  h1.big            { font-size: 1.9rem; line-height: 1.15; }
+  :is(h1,h2,h3,h4).titanic { font-size: 2.4rem; line-height: 1.1; }
+  :is(h1,h2,h3,h4).big     { font-size: 1.9rem; line-height: 1.15; }
 
   /* Principles · 2 frentes apilados verticalmente */
   .principles       { grid-template-columns: 1fr; gap: 1.2rem; }
@@ -1286,10 +1290,10 @@ ul.big li .n {
 <section class="slide">
   <div class="eyebrow">En números</div>
   <h2 class="big">Por qué <span class="green">consolidar</span> con EFC.</h2>
-  <div class="kpi-grid cols-3">
-    <div class="kpi"><div class="kpi-val">8 <small>líneas</small></div><div class="kpi-label">Cobertura industrial integral</div></div>
-    <div class="kpi"><div class="kpi-val">SGS A <small>100%</small></div><div class="kpi-label">Homologación de proveedores</div></div>
-    <div class="kpi"><div class="kpi-val">4 <small>sedes</small></div><div class="kpi-label">Surquillo · Chorrillos · Arequipa · Miami</div></div>
+  <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="kpi"><div class="v">8 <small>líneas</small></div><div class="l">Cobertura industrial integral</div></div>
+    <div class="kpi"><div class="v">SGS A <small>100%</small></div><div class="l">Homologación de proveedores</div></div>
+    <div class="kpi"><div class="v">4 <small>sedes</small></div><div class="l">Surquillo · Chorrillos · Arequipa · Miami</div></div>
   </div>
 </section>
 
