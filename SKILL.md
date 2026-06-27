@@ -229,23 +229,20 @@ El skill trae una librería **offline** de imágenes en `assets/library/`, index
 - **Python 3** con `python-pptx` y `pdfminer.six` **solo si** usás los extractores (`pip install python-pptx pdfminer.six`).
 - **ImageMagick** (`magick`) recomendado para preparar imágenes (upscale, recortes, viñetas).
 
-### 🟢 Ver un PPTX como imágenes (analizar plantillas/PPTs sin LibreOffice)
+### 🟢 Ver un PPTX como imágenes (analizar plantillas/PPTs sin LibreOffice) — HERRAMIENTA DEL SKILL
 `python-pptx` NO renderiza (solo lee texto/estructura). Para **ver** un pptx (cuando te pasan una
-plantilla y querés extraer sus infografías), renderizá cada slide a PNG con **aspose.slides** +
-**mono-libgdiplus** (no necesita LibreOffice):
+plantilla o un PPT viejo y querés extraer/replicar sus infografías) usá la herramienta del skill
+`extractors/render_pptx.py` (usa **aspose.slides** + **mono-libgdiplus**, sin LibreOffice):
 ```bash
-brew install mono-libgdiplus
-python3.13 -m venv /tmp/pptenv && /tmp/pptenv/bin/pip install aspose.slides   # aspose NO tiene wheel para py3.14: usar 3.13
-DYL=$(brew --prefix mono-libgdiplus)/lib                                       # libgdiplus.0.dylib
-DYLD_LIBRARY_PATH="$DYL" /tmp/pptenv/bin/python -c '
-import aspose.slides as s
-with s.Presentation("plantilla.pptx") as p:
-    for i,sl in enumerate(p.slides,1): sl.get_image(1.2,1.2).save(f"/tmp/s{i:02d}.png", s.ImageFormat.PNG)'
-# luego: magick montage /tmp/s*.png -tile 5x -geometry 300x169 sheet.png  → contact sheet para leerlas
+bash tools/setup-pptx-render.sh                       # una sola vez (brew + venv ~/.pptefc-venv + aspose)
+~/.pptefc-venv/bin/python extractors/render_pptx.py "plantilla.pptx" --sheet
+#  → renderiza s01.png… + un _sheet.png (contact sheet) para leer todas de un vistazo
 ```
-La versión free de aspose pone una marca de agua "Evaluation only" — sirve para **analizar** (verlas),
-NO para producir deliverables. El flujo correcto: ver la plantilla → **re-vestir sus patrones con la
-identidad EFC** (componentes `deck.css`), nunca copiar su estilo.
+🔴 La versión free de aspose estampa "Evaluation only" — sirve para **analizar** (verlas), NUNCA
+para deliverables. El flujo correcto: **ver** la plantilla → **re-vestir sus PATRONES con identidad
+EFC** (componentes `deck.css`), jamás copiar su estilo ni reusar sus imágenes con watermark.
+Esto es clave porque el fuerte del skill es **convertir pptx/pdf → HTML+CSS EFC**: hay que poder ver
+el original, no trabajar a ciegas.
 
 ---
 
