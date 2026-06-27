@@ -1163,7 +1163,58 @@ ul.big li .n {
 .icard h4 { font-size: 1.05rem; font-weight: 700; color: #fff; }
 .icard p { font-size: .82rem; color: var(--w60); line-height: 1.4; }
 
+/* ══ INFOGRAFÍAS DE DOMINIO · proyectos · seguridad · comex · soporte · logística ══ */
+
+/* ── Matriz de riesgo · 3×3 impacto × probabilidad ──────────────────────── */
+.riskmatrix { display: grid; grid-template-columns: 2rem repeat(3, 1fr); grid-template-rows: repeat(3, 1fr) 2rem;
+  gap: 6px; margin: var(--sp-6) auto 0; max-width: 720px; aspect-ratio: 3 / 2; }
+.rm-cell { border-radius: 8px; display: flex; align-items: center; justify-content: center; position: relative; }
+.rm-cell.low  { background: rgba(107,176,23,.70); }
+.rm-cell.med  { background: rgba(245,158,11,.80); }
+.rm-cell.high { background: rgba(239,68,68,.85); }
+.rm-dot { width: 28px; height: 28px; border-radius: 50%; background: #0a0e0a; color: #fff;
+  display: flex; align-items: center; justify-content: center; font-size: .85rem; font-weight: 800;
+  border: 2px solid rgba(255,255,255,.55); }
+.rm-axis { display: flex; align-items: center; justify-content: center; font-size: .68rem;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--w60); font-weight: 700; text-align: center; }
+.rm-axis.y { writing-mode: vertical-rl; transform: rotate(180deg); }
+
+/* ── Gantt / cronograma ─────────────────────────────────────────────────── */
+.gantt { margin-top: var(--sp-6); display: flex; flex-direction: column; gap: .7rem; }
+.gantt-head { display: grid; grid-template-columns: 9rem 1fr; gap: 1rem; }
+.gantt-head .g-months { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr;
+  font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--w40); font-weight: 700; }
+.gantt-head .g-months span { text-align: center; border-left: 1px solid var(--w20); padding-bottom: .3rem; }
+.gantt-row { display: grid; grid-template-columns: 9rem 1fr; gap: 1rem; align-items: center; }
+.gantt-row .g-task { font-size: .9rem; color: #fff; font-weight: 600; }
+.gantt-row .g-track { position: relative; height: 24px; background: rgba(255,255,255,.04); border-radius: 6px; }
+.g-bar { position: absolute; top: 0; bottom: 0; border-radius: 6px; display: flex; align-items: center;
+  padding: 0 .55rem; font-size: .72rem; font-weight: 700; color: #0a0e0a; white-space: nowrap;
+  background: linear-gradient(90deg, var(--efc-bright), var(--efc)); }
+.g-bar.b { background: linear-gradient(90deg, var(--orange), #b45309); color: #fff; }
+
+/* ── Embudo / funnel ────────────────────────────────────────────────────── */
+.funnel { margin: var(--sp-6) auto 0; display: flex; flex-direction: column; align-items: center;
+  gap: .5rem; max-width: 760px; }
+.funnel-stage { display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: .85rem 1.6rem; border-radius: 6px; color: #0a0e0a; }
+.funnel-stage .fs-label { font-weight: 700; font-size: .95rem; }
+.funnel-stage .fs-val { font-weight: 800; font-size: 1.1rem; }
+
+/* ── Gauges · anillos de progreso (KPIs / performance) ──────────────────── */
+.gauges { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--sp-6); margin-top: var(--sp-6); justify-items: center; }
+.gauge { text-align: center; }
+.gauge-ring { position: relative; width: 150px; height: 150px; }
+.gauge-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.gauge-pct { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem; font-weight: 800; color: var(--efc-bright); }
+.gauge-l { margin-top: .6rem; font-size: .9rem; color: var(--w60); font-weight: 600; }
+
 @media (max-width: 900px) {
+  /* Infografías de dominio → apilado en mobile */
+  .gantt-head, .gantt-row { grid-template-columns: 1fr; }
+  .gauges { grid-template-columns: repeat(2, 1fr); }
   /* Infografías nuevas → apilado vertical en mobile */
   .ecosystem      { display: flex; flex-direction: column; }
   .eco-lines      { display: none; }

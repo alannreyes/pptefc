@@ -156,6 +156,10 @@ Antes de generar, **contar las palabras del slide más cargado**. Si supera 60 t
 | **Mapa de sedes** | `<div class="sedes-map"><div class="pin" style="left:%;top:%"><div class="pin-card">…</div><div class="dot"></div></div>…</div>` |
 | **Donut + stats** | `<div class="donut-stats"><div class="ds-ring"><svg viewBox="0 0 240 240">…circles con stroke-dasharray…</svg><div class="ds-center">svg</div></div><div class="ds-list"><div class="ds-row"><div class="ds-pct">50%</div><div class="ds-txt"><div class="ds-l">…</div><p>…</p></div></div>…</div></div>` |
 | **Grid de íconos** | `<div class="icongrid"><div class="icard"><div class="ic">svg</div><h4>…</h4><p>…</p></div>×4</div>` |
+| **Matriz de riesgo** | `<div class="riskmatrix"><div class="rm-axis y" style="grid-row:1/4;grid-column:1">Impacto</div><div class="rm-cell high"><div class="rm-dot">1</div></div>…9 celdas low/med/high… <div class="rm-axis">Prob.</div>×3</div>` → proyectos, seguridad |
+| **Gantt / cronograma** | `<div class="gantt"><div class="gantt-head"><div></div><div class="g-months"><span>M1</span>…</div></div><div class="gantt-row"><div class="g-task">Tarea</div><div class="g-track"><div class="g-bar" style="left:%;width:%">…</div></div></div>…</div>` (`.g-bar.b` naranja) → proyectos, ingeniería, logística |
+| **Embudo / funnel** | `<div class="funnel"><div class="funnel-stage" style="width:%;background:…"><span class="fs-label">…</span><span class="fs-val">…</span></div>…</div>` → comercio exterior, ventas |
+| **Gauges** (anillos) | `<div class="gauges"><div class="gauge"><div class="gauge-ring"><svg viewBox="0 0 160 160">…circles stroke-dasharray…</svg><div class="gauge-pct">86%</div></div><div class="gauge-l">…</div></div>…</div>` → soporte, performance (SAC) |
 | **Otros** | `.versus`/`.compare` · `.principles`/`.principle` (2 frentes) · `.axes`/`.axis` (2×2) · `.moments` · `.hitos` · `.curves` · `.ask` · `.value-chain` · `.stack` |
 
 Color: `<span class="green">` (acento EFC) · `.orange` (cliente/producto) · `.muted`/`.dim`.

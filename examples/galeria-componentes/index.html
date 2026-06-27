@@ -1293,7 +1293,58 @@ ul.big li .n {
 .icard h4 { font-size: 1.05rem; font-weight: 700; color: #fff; }
 .icard p { font-size: .82rem; color: var(--w60); line-height: 1.4; }
 
+/* ══ INFOGRAFÍAS DE DOMINIO · proyectos · seguridad · comex · soporte · logística ══ */
+
+/* ── Matriz de riesgo · 3×3 impacto × probabilidad ──────────────────────── */
+.riskmatrix { display: grid; grid-template-columns: 2rem repeat(3, 1fr); grid-template-rows: repeat(3, 1fr) 2rem;
+  gap: 6px; margin: var(--sp-6) auto 0; max-width: 720px; aspect-ratio: 3 / 2; }
+.rm-cell { border-radius: 8px; display: flex; align-items: center; justify-content: center; position: relative; }
+.rm-cell.low  { background: rgba(107,176,23,.70); }
+.rm-cell.med  { background: rgba(245,158,11,.80); }
+.rm-cell.high { background: rgba(239,68,68,.85); }
+.rm-dot { width: 28px; height: 28px; border-radius: 50%; background: #0a0e0a; color: #fff;
+  display: flex; align-items: center; justify-content: center; font-size: .85rem; font-weight: 800;
+  border: 2px solid rgba(255,255,255,.55); }
+.rm-axis { display: flex; align-items: center; justify-content: center; font-size: .68rem;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--w60); font-weight: 700; text-align: center; }
+.rm-axis.y { writing-mode: vertical-rl; transform: rotate(180deg); }
+
+/* ── Gantt / cronograma ─────────────────────────────────────────────────── */
+.gantt { margin-top: var(--sp-6); display: flex; flex-direction: column; gap: .7rem; }
+.gantt-head { display: grid; grid-template-columns: 9rem 1fr; gap: 1rem; }
+.gantt-head .g-months { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr;
+  font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--w40); font-weight: 700; }
+.gantt-head .g-months span { text-align: center; border-left: 1px solid var(--w20); padding-bottom: .3rem; }
+.gantt-row { display: grid; grid-template-columns: 9rem 1fr; gap: 1rem; align-items: center; }
+.gantt-row .g-task { font-size: .9rem; color: #fff; font-weight: 600; }
+.gantt-row .g-track { position: relative; height: 24px; background: rgba(255,255,255,.04); border-radius: 6px; }
+.g-bar { position: absolute; top: 0; bottom: 0; border-radius: 6px; display: flex; align-items: center;
+  padding: 0 .55rem; font-size: .72rem; font-weight: 700; color: #0a0e0a; white-space: nowrap;
+  background: linear-gradient(90deg, var(--efc-bright), var(--efc)); }
+.g-bar.b { background: linear-gradient(90deg, var(--orange), #b45309); color: #fff; }
+
+/* ── Embudo / funnel ────────────────────────────────────────────────────── */
+.funnel { margin: var(--sp-6) auto 0; display: flex; flex-direction: column; align-items: center;
+  gap: .5rem; max-width: 760px; }
+.funnel-stage { display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: .85rem 1.6rem; border-radius: 6px; color: #0a0e0a; }
+.funnel-stage .fs-label { font-weight: 700; font-size: .95rem; }
+.funnel-stage .fs-val { font-weight: 800; font-size: 1.1rem; }
+
+/* ── Gauges · anillos de progreso (KPIs / performance) ──────────────────── */
+.gauges { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--sp-6); margin-top: var(--sp-6); justify-items: center; }
+.gauge { text-align: center; }
+.gauge-ring { position: relative; width: 150px; height: 150px; }
+.gauge-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.gauge-pct { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 1.8rem; font-weight: 800; color: var(--efc-bright); }
+.gauge-l { margin-top: .6rem; font-size: .9rem; color: var(--w60); font-weight: 600; }
+
 @media (max-width: 900px) {
+  /* Infografías de dominio → apilado en mobile */
+  .gantt-head, .gantt-row { grid-template-columns: 1fr; }
+  .gauges { grid-template-columns: repeat(2, 1fr); }
   /* Infografías nuevas → apilado vertical en mobile */
   .ecosystem      { display: flex; flex-direction: column; }
   .eco-lines      { display: none; }
@@ -1455,6 +1506,32 @@ ul.big li .n {
   <div class="icard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div><h4>Homologación</h4><p>SGS Calificación A · 100%.</p></div>
   <div class="icard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22" x2="12" y2="12"/></svg></div><h4>Consignación</h4><p>VHS y reposición en sitio.</p></div>
 </div></section>
+
+
+<section class="slide"><div class="eyebrow">Componente NUEVO · matriz de riesgo</div><h2 class="big">Riesgos del <span class="green">proyecto</span>.</h2>
+<div class="riskmatrix">
+  <div class="rm-axis y" style="grid-row:1/4;grid-column:1">Impacto</div>
+  <div class="rm-cell med"></div><div class="rm-cell high"><div class="rm-dot">1</div></div><div class="rm-cell high"><div class="rm-dot">2</div></div>
+  <div class="rm-cell low"></div><div class="rm-cell med"><div class="rm-dot">3</div></div><div class="rm-cell high"></div>
+  <div class="rm-cell low"></div><div class="rm-cell low"><div class="rm-dot">4</div></div><div class="rm-cell med"></div>
+  <div></div><div class="rm-axis">Prob. baja</div><div class="rm-axis">Media</div><div class="rm-axis">Alta</div>
+</div></section>
+
+<section class="slide"><div class="eyebrow">Componente NUEVO · Gantt / cronograma</div><h2 class="big">Plan de <span class="green">ejecución</span>.</h2>
+<div class="gantt">
+  <div class="gantt-head"><div></div><div class="g-months"><span>M1</span><span>M2</span><span>M3</span><span>M4</span><span>M5</span><span>M6</span></div></div>
+  <div class="gantt-row"><div class="g-task">Relevamiento</div><div class="g-track"><div class="g-bar" style="left:0%;width:17%">2 sem</div></div></div>
+  <div class="gantt-row"><div class="g-task">Homologación</div><div class="g-track"><div class="g-bar" style="left:15%;width:30%"></div></div></div>
+  <div class="gantt-row"><div class="g-task">Importación</div><div class="g-track"><div class="g-bar b" style="left:33%;width:34%">Comex</div></div></div>
+  <div class="gantt-row"><div class="g-task">Abastecimiento</div><div class="g-track"><div class="g-bar" style="left:50%;width:34%"></div></div></div>
+  <div class="gantt-row"><div class="g-task">Operación / VHS</div><div class="g-track"><div class="g-bar" style="left:67%;width:33%"></div></div></div>
+</div></section>
+
+<section class="slide"><div class="eyebrow">Componente NUEVO · embudo (comercio exterior)</div><h2 class="big">Pipeline de <span class="green">importaciones</span>.</h2>
+<div class="funnel"><div class="funnel-stage" style="width:100%;background:var(--efc-bright)"><span class="fs-label">Cotizado</span><span class="fs-val">190 ítems/mes</span></div><div class="funnel-stage" style="width:82%;background:#74b01a"><span class="fs-label">Adjudicado</span><span class="fs-val">132 ítems/mes</span></div><div class="funnel-stage" style="width:64%;background:#5d9215"><span class="fs-label">Importado</span><span class="fs-val">$220K/mes</span></div><div class="funnel-stage" style="width:48%;background:#477010"><span class="fs-label">Entregado en faena</span><span class="fs-val">98% on time</span></div></div></section>
+
+<section class="slide"><div class="eyebrow">Componente NUEVO · gauges (soporte / performance)</div><h2 class="big">Nivel de <span class="green">servicio</span>.</h2>
+<div class="gauges"><div class="gauge"><div class="gauge-ring"><svg viewBox="0 0 160 160"><circle cx="80" cy="80" r="65" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="14"/><circle cx="80" cy="80" r="65" fill="none" stroke="var(--efc-bright)" stroke-width="14" stroke-linecap="round" stroke-dasharray="351 408"/></svg><div class="gauge-pct">86%</div></div><div class="gauge-l">On time</div></div><div class="gauge"><div class="gauge-ring"><svg viewBox="0 0 160 160"><circle cx="80" cy="80" r="65" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="14"/><circle cx="80" cy="80" r="65" fill="none" stroke="var(--efc-bright)" stroke-width="14" stroke-linecap="round" stroke-dasharray="294 408"/></svg><div class="gauge-pct">72%</div></div><div class="gauge-l">Ítems atendidos</div></div><div class="gauge"><div class="gauge-ring"><svg viewBox="0 0 160 160"><circle cx="80" cy="80" r="65" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="14"/><circle cx="80" cy="80" r="65" fill="none" stroke="var(--efc-bright)" stroke-width="14" stroke-linecap="round" stroke-dasharray="388 408"/></svg><div class="gauge-pct">95%</div></div><div class="gauge-l">SLA cotización</div></div><div class="gauge"><div class="gauge-ring"><svg viewBox="0 0 160 160"><circle cx="80" cy="80" r="65" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="14"/><circle cx="80" cy="80" r="65" fill="none" stroke="var(--efc-bright)" stroke-width="14" stroke-linecap="round" stroke-dasharray="408 408"/></svg><div class="gauge-pct">100%</div></div><div class="gauge-l">Homologación</div></div></div></section>
 
 <section class="slide quote-slide"><div class="quote-mark">&#8220;</div><blockquote>Lo necesitas, <span class="accent">lo hacemos.</span></blockquote><div class="attribution"><span class="name">EFC</span> · desde 1970</div></section>
 <section class="slide center"><div class="eyebrow">Componente · next-list (cierre)</div><h2 class="big"><span class="green">Próximos</span> pasos.</h2><div class="next-list"><div class="next-step"><div class="n">1</div><div><h4>Visita técnica</h4><p>Relevamiento de la operación.</p></div></div><div class="next-step"><div class="n">2</div><div><h4>Cotización consolidada</h4><p>Una sola propuesta.</p></div></div></div></section>
