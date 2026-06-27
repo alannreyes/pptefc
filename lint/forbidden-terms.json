@@ -1,0 +1,76 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "updated": "2026-05-07",
+    "description": "Términos prohibidos en presentaciones EFC. Aprendidos de iteraciones reales con clientes. Cada entrada: term (qué buscar), reason (por qué se prohíbe), severity (block | warn), case_sensitive (default false), suggestion (qué usar en su lugar)."
+  },
+
+  "condescendiente": [
+    { "term": "en lenguaje normal",     "severity": "block", "reason": "Condescendiente. El cliente es ejecutivo.", "suggestion": "Eliminar el preámbulo y explicar directamente." },
+    { "term": "honestamente",            "severity": "warn",  "reason": "Tono casual. ¿Qué está implicando? Si necesita 'honestamente' es porque no fue honesto antes.", "suggestion": "Simplemente decir el dato." },
+    { "term": "obviamente",              "severity": "warn",  "reason": "Asume que el lector ya sabe.", "suggestion": "Explicar la idea sin asumir." },
+    { "term": "simple:",                 "severity": "warn",  "reason": "Implica que el lector no entiende lo complejo.", "suggestion": "Eliminar y explicar normalmente." }
+  ],
+
+  "efectismo_vacio": [
+    { "term": "P&L roto",                "severity": "block", "reason": "Frase efectista sin sustento. Sin números, no convence.", "suggestion": "Citar costos reales con fuente." },
+    { "term": "tiempo de inspección: cero", "severity": "block", "reason": "Imposible literalmente.", "suggestion": "Decir el tiempo real con cifra." },
+    { "term": "cambia el juego",         "severity": "warn",  "reason": "Cliché.", "suggestion": "Especificar qué cambia exactamente." },
+    { "term": "revoluciona",             "severity": "warn",  "reason": "Marketing barato.", "suggestion": "Decir el efecto operativo concreto." },
+    { "term": "el drone que les falta",  "severity": "warn",  "reason": "Asume el inventario del cliente.", "suggestion": "Hablar de capacidades, no de gaps." }
+  ],
+
+  "asume_inventario_cliente": [
+    { "term": "ya operan ~?\\d+ drones", "severity": "block", "regex": true, "reason": "Asume cantidades específicas del cliente. Información puede estar obsoleta.", "suggestion": "Si el cliente lo menciona, escuchar; no asumir." },
+    { "term": "su flota DJI",            "severity": "block", "reason": "Asume marca específica del inventario del cliente.", "suggestion": "Hablar de arquitecturas, no de marcas." },
+    { "term": "su flota multirotor",     "severity": "warn",  "reason": "Asume que tienen multirotor. Verificar primero.", "suggestion": "Hablar de capacidades genéricas." },
+    { "term": "ustedes ya tienen",       "severity": "warn",  "reason": "Asume inventario sin confirmar.", "suggestion": "Si lo dicen ellos, escuchar." }
+  ],
+
+  "comparacion_peyorativa_marcas": [
+    { "term": "tecnología china",        "severity": "block", "reason": "Comparación geopolítica peyorativa.", "suggestion": "Hablar de origen geográfico neutralmente o de soberanía del dato sin atacar." },
+    { "term": "barata china",            "severity": "block", "reason": "Peyorativo y simplista.", "suggestion": "No comparar peyorativamente." },
+    { "term": "el problema con DJI",     "severity": "warn",  "reason": "Marca específica como negativa.", "suggestion": "Comparar arquitecturas (multirotor vs ala fija)." }
+  ],
+
+  "fechas_caducas": [
+    { "term": "55 años",                 "severity": "block", "reason": "Fue campaña 2025. EFC siempre cumple +1 cada año.", "suggestion": "Décadas / sin mencionar número específico." },
+    { "term": "55años",                  "severity": "block", "reason": "Idem.", "suggestion": "Décadas." },
+    { "term": "Validez: 10 días desde 18-MAR-2026", "severity": "block", "reason": "Fecha vencida.", "suggestion": "A confirmar al emitir OC." },
+    { "term": "10 días desde",           "severity": "warn",  "reason": "Posible fecha vencida si no se actualiza.", "suggestion": "A confirmar al emitir OC." }
+  ],
+
+  "compromisos_no_factibles": [
+    { "term": "Demo técnica remota: 45 min con piloto certificado", "severity": "block", "reason": "EFC no tiene equipos demo en stock — primera importación es contra OC.", "suggestion": "Sesión técnica de profundización (sin equipo)." },
+    { "term": "Visita a sitio garantizada", "severity": "warn",  "reason": "Compromiso de viaje sin recursos confirmados.", "suggestion": "Material para validación interna." },
+    { "term": "demo en sitio",           "severity": "warn",  "reason": "Verificar que haya equipo demo disponible.", "suggestion": "Verificar antes de prometer." }
+  ],
+
+  "friccion_en_cierre": [
+    { "term": "Postventa: 15 días",      "severity": "block", "reason": "Activa frame de objeción en slide cierre.", "suggestion": "Mover a briefing del vendedor; mostrar términos POSITIVOS en slide." },
+    { "term": "Soporte local: EFC · Lima", "severity": "warn", "reason": "Sin contexto suena restrictivo (¿solo en Lima?).", "suggestion": "Mover a slide 'Por qué EFC' con framing positivo." },
+    { "term": "disconformidad",          "severity": "block", "reason": "Palabra que invita a buscar problemas.", "suggestion": "Eliminar del slide cierre." },
+    { "term": "no aceptan devolución",   "severity": "warn",  "reason": "Anti-cierre.", "suggestion": "Mover a letra chica del briefing." }
+  ],
+
+  "jerga_sin_aclarar": [
+    { "term": "PPK",                     "severity": "warn",  "reason": "Acrónimo. Aclarar entre paréntesis en primera aparición.", "suggestion": "PPK (corrección de posición post-vuelo, < 3 cm de precisión)" },
+    { "term": "GSD",                     "severity": "block", "reason": "Acrónimo no comprendido por el cliente.", "suggestion": "Decir 'resolución por píxel a X m de altura'." },
+    { "term": "AGL",                     "severity": "block", "reason": "Acrónimo aviación.", "suggestion": "Decir 'sobre el terreno'." },
+    { "term": "BVLOS",                   "severity": "warn",  "reason": "Acrónimo aviación.", "suggestion": "BVLOS (vuelo más allá de línea visual del piloto)" },
+    { "term": "GNSS",                    "severity": "warn",  "reason": "Acrónimo posicionamiento.", "suggestion": "Decir 'GPS de precisión' o aclarar entre paréntesis." },
+    { "term": "FOV",                     "severity": "warn",  "reason": "Acrónimo cámaras.", "suggestion": "Decir 'campo visual'." },
+    { "term": "GCP",                     "severity": "warn",  "reason": "Acrónimo topografía.", "suggestion": "GCP (puntos de control físicos en el terreno)." },
+    { "term": "DEM",                     "severity": "warn",  "reason": "Acrónimo modelos terreno.", "suggestion": "Decir 'mapa de relieve' o 'modelo digital del terreno'." },
+    { "term": "hover",                   "severity": "warn",  "reason": "Jerga aviación.", "suggestion": "Decir 'vuelo estacionario (quedarse fijo en un punto)'." },
+    { "term": "deep-stall",              "severity": "warn",  "reason": "Jerga aviación.", "suggestion": "Aclarar entre paréntesis: 'aterrizaje por pérdida controlada (deep-stall)'." },
+    { "term": "global shutter",          "severity": "warn",  "reason": "Jerga cámaras.", "suggestion": "Aclarar entre paréntesis: 'obturador global (sin distorsión por movimiento)'." },
+    { "term": "re-tiling",               "severity": "block", "reason": "Jerga procesamiento.", "suggestion": "Decir 'sin tener que dividir el área en múltiples vuelos'." },
+    { "term": "wheel-paths",             "severity": "warn",  "reason": "Jerga vías.", "suggestion": "Decir 'huellas de las ruedas' o 'rodadas'." }
+  ],
+
+  "frases_ambiguas": [
+    { "term": "su data nunca cruza una nube extranjera", "severity": "block", "reason": "Frase ambigua, suena conspirativa, no aclara nada.", "suggestion": "Procesamiento puede hacerse en oficina del cliente, sin enviar data a servicios externos." },
+    { "term": "nube extranjera",         "severity": "warn",  "reason": "Frase ambigua.", "suggestion": "Decir lo concreto: 'procesamiento on-prem' o 'data permanece en la red del cliente'." }
+  ]
+}

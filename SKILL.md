@@ -1,0 +1,271 @@
+---
+name: pptefc
+description: Construye presentaciones comerciales (decks) y guías panorámicas con la identidad visual de EFC, 100% en LOCAL — sin servidor, sin VPS, sin accesos. Genera HTML auto-contenido (logo en base64, CSS/JS inline, tipografía de sistema) que se abre con doble-click y se puede enviar por correo, más export a PDF de calidad. Úsalo cuando el usuario pida "armar una presentación de X producto para Y cliente", "un deck EFC", "convertir este PPTX/PDF a presentación EFC", o trabajar con decks/guías en cualquier carpeta local.
+---
+
+# pptefc — Fábrica LOCAL de presentaciones EFC
+
+Skill para construir **decks cinematográficos** (propuestas comerciales 1-cliente) y
+**guías panorámicas** (educativas) con la identidad oficial de EFC, **enteramente en local**.
+
+> Esta es la edición **portátil** de la fábrica de presentaciones EFC: pensada para que
+> cualquiera del equipo EFC o partner, con Claude Code y este skill, arme presentaciones
+> profesionales **sin infraestructura** y comparta el resultado por correo.
+
+> **No es una librería de templates. Es una memoria operativa.** Acumula reglas que se
+> pagaron iterando con clientes reales. Léelas. Aplicalas. No las re-descubras.
+
+---
+
+## Principio rector · TODO en local, TODO auto-contenido
+
+`pptefc` NO usa servidor, NO publica a ningún catálogo, NO requiere login ni VPS.
+El producto final es **un archivo que viaja solo**:
+
+- **HTML auto-contenido** que se abre con doble-click (offline) y se puede **adjuntar a un correo**.
+- **PDF de calidad** (1280×720, una slide por página) para descarga/impresión.
+
+Para que el HTML viaje por correo y funcione sin internet, **TODO va embebido**:
+
+1. **CSS embebido**: leer `design-system/tokens.css` + `design-system/deck.css` (o `guide.css`
+   para guías) con la tool `Read` y pegar su contenido entero dentro de un `<style>` en el `<head>`.
+2. **JS embebido**: navegación con flechas + interacciones inline en un `<script>` antes de `</body>`.
+   NUNCA `<script src="...">`.
+3. **Logo EFC en base64**: `base64 -i assets/efc_logo.png` y usarlo como
+   `<img src="data:image/png;base64,...">`. NUNCA una ruta absoluta ni una URL.
+4. **🔴 Tipografía de sistema — NUNCA Google Fonts.** El stack ya es de sistema
+   (`"Helvetica Neue", "Inter", "Calibri", system-ui, -apple-system, sans-serif`, en `tokens.css`).
+   **NO agregar** `<link href="fonts.googleapis.com">` ni `@import url(...)`: rompe el offline y
+   el correo. Si se necesita fidelidad pixel exacta, embeber la fuente en base64 (`@font-face` con
+   `src:url(data:font/woff2;base64,...)`) — pero por defecto, stack de sistema.
+5. **Imágenes/videos del producto**: van en una subcarpeta `assets/` JUNTO al HTML, con ruta
+   relativa (`assets/foto.jpg`). Para enviar por correo: **zippear la carpeta** (HTML + assets) o,
+   si son pocas imágenes y el peso lo permite, embeberlas también en base64 para un único archivo.
+
+**Estructura de salida** (en la carpeta donde trabaja el usuario):
+```
+{nombre-deck}/
+├── index.html      ← auto-contenido, abrible con doble-click, adjuntable
+├── {slug}.pdf      ← generado con exporters/to_pdf.py
+└── assets/         ← fotos/videos propios (solo si los usás por ruta relativa)
+```
+
+NO generar `meta.json` ni nada de catálogo: este skill no publica a ningún sitio.
+
+---
+
+## Cinco tipos. Una sola identidad.
+
+Cada tipo tiene estructura propia pero **toda con la misma identidad visual EFC**
+(verde sobre negro, tipografía, logo, fondo cinematográfico).
+
+### 1. `comercial` — Propuesta a cliente externo (12 slides)
+Frente al cliente final (gerente, C-level, comprador). Foco en venta. Tono ejecutivo.
+```
+01 Portada · 02 Requerimiento · 03 La herramienta · 04 KPIs · 05 Versus · 06 Aplicaciones
+07 Ficha técnica · 08 Referencias · 09 Diferenciador (opc) · 10 Por qué EFC · 11 Inversión · 12 Próximo paso
+```
+
+### 2. `interno-resumen-ejecutivo` — Caso a directorio/gerencia (5–7 slides densos)
+Portada · Contexto · Diagnóstico · Opciones · Recomendación · Costo+tiempos · Decisión que pido.
+Jerga técnica permitida. Sin slide "Por qué EFC". "Decisión que pido" = pregunta concreta binaria.
+
+### 3. `interno-status-proyecto` — Status recurrente (6–8 slides)
+Portada · Resumen (semáforo 🟢🟡🔴) · KPIs período-vs-período · Pipeline · Hitos · Riesgos (matriz) · Decisiones · Próximo período.
+
+### 4. `interno-capacitacion` — Curso/proceso
+Cada módulo: **concepto → ejemplo concreto → checklist accionable**. Outcomes al inicio, recursos al final.
+
+### 5. `guia` — Guía panorámica (scroll continuo, TOC sticky, glosario al final)
+Hero · TOC · Decisión · Categorías · Mapa fabricantes · Selector · Contactos · Glosario.
+
+Si el prompt es ambiguo, **preguntar** el tipo antes de generar.
+
+---
+
+## Identidad visual EFC (canónica)
+
+### Paleta (`design-system/tokens.css`)
+```css
+--green:#6BB017;        /* verde corporativo (sampleado del logo) */
+--green-bright:#8fd62d;  /* acento luminoso */
+--amber:#f59e0b;         /* acento secundario / alertas */
+--bg:#0a0e0a;            /* fondo cinematográfico casi-negro */
+```
+Verde EFC = identidad/capacidad propia. Naranja/ámbar = cliente, fabricantes, productos, alertas.
+
+### Tipografía (stack de sistema, ver Principio rector)
+`"Helvetica Neue", "Inter", "Calibri", system-ui, sans-serif`. Sobre video/imagen: `text-shadow: 0 2px 18px rgba(0,0,0,.55)`.
+
+### Logo
+`assets/efc_logo.png` (versión limpia, **sin "55 años"** — era campaña vieja). Embeber en base64.
+
+---
+
+## REGLAS DURAS · Tono y lenguaje
+
+### Regla #1 — Menos es más
+**Cada slide se lee en ≤ 10 segundos.** La presentación es un guion visual, no un documento.
+
+| Elemento | Máximo |
+|---|---|
+| Eyebrow + título + subtítulo (juntos) | 12 palabras |
+| Cada card / tile / item de grilla | 12 palabras |
+| Lista de bullets | ≤ 5 bullets, c/u ≤ 6 palabras |
+| Párrafo "intro" del slide | ELIMINAR — lo cuenta el orador |
+| KPI grande | la unidad en `<small>`, el número manda |
+
+Antes de generar, **contar las palabras del slide más cargado**. Si supera 60 totales: comprimir.
+
+### Prohibido (lint lo marca)
+- ❌ Datos inventados sin fuente verificable
+- ❌ Fechas vencidas · referencias al "55 años" (campaña pasada)
+- ❌ Efectismo vacío: «cambia el juego», «revoluciona», «P&L roto» sin contexto
+- ❌ Tono condescendiente: «en lenguaje normal», «obviamente», «honestamente»
+
+### `comercial` (estricto · cliente externo)
+- ❌ Mencionar inventario/flota del cliente · comparaciones peyorativas por marca · jerga sin aclarar
+- ❌ Términos de fricción en el cierre («postventa 15 días disconformidad», «soporte limitado»)
+- ✅ Comparar arquitecturas, no marcas · aclarar acrónimos la 1ª vez · ≤ 30 palabras/slide
+- ✅ Cierre con 3 next-steps factibles · contactos homologados (todos teléfono o todos correo)
+
+### `guia`
+- ✅ Glosario al final · TOC sticky · CTA de cierre. Lint en modo `guide` (jerga = warn).
+
+---
+
+## Componentes disponibles (`design-system/deck.css`)
+
+Topbar progress · slide counter «X/N» · chapter rail (si ≥2 capítulos) · `.kpi-grid` ·
+`.compare-table` (versus) · `.pillars` · `.quote-slide` (apertura/cierre con cita ancla) ·
+`.principles` (2 frentes verde+naranja) · `.axes` (2×2) · `.team-row`/`.closing-team` ·
+`.donut-svg` (8 wedges) · `.has-opesp` (grid fit-to-viewport) · `.value-chain` · `.sinergia`.
+
+**Reglas de forma duras:**
+- 🔴 La media query mobile (`@media (max-width:900px)`) va **al FINAL del CSS** (gana por orden).
+- 🔴 **Pantalla 50"+**: body ≥15px, eyebrows ≥13px, labels ≥12px. Nada <12px (excepto `@media (max-width:600px)`).
+- 🟢 Cards padding ≥1.6rem · bullets ≥1rem · si el slide tiene mucho, **subir** el H1, no bajarlo.
+- 🟡 Abrir y cerrar el deck con `.quote-slide` (citas ancla) da peso institucional.
+
+---
+
+## Workflow para un deck nuevo
+
+1. **Leer el brief** (cliente, producto, objetivo) y todos los archivos de input con `Read`.
+2. **Investigar referencias verificables** (web del fabricante, casos publicados). Sin inventar.
+3. **Verificar imágenes** del fabricante con `Read` antes de aceptarlas.
+4. **Confirmar al usuario** los datos clave (producto/modelo, cliente/operación, caso de uso, cotización vigente, contactos homologados).
+5. **Generar las slides** (estructura del tipo elegido) como **HTML auto-contenido** (ver Principio rector).
+6. **Aplicar el lint**: `python3 lint/lint.py index.html`
+7. **Verificar responsive** a 375 / 768 / 1280 / 1920 px (si hay navegador) o por inspección.
+8. **Generar PDF**: `python3 exporters/to_pdf.py {carpeta-del-deck}/` → `{slug}.pdf` (1280×720, 1 slide/página).
+   Validar rasterizando: `pdftoppm -png -r 90 {slug}.pdf _p` y leer las slides densas. Borrar temporales.
+9. **Mostrar preview** al usuario e **iterar** hasta aprobación.
+10. **Compartir**: el `index.html` (+ carpeta `assets/` si la hay) se adjunta al correo o se zippea; el PDF va directo.
+
+Para **guías**: igual, pero scroll continuo (no slide-by-slide), `guide.css`, TOC sticky, glosario. El PDF aplica solo a decks (`.slide`).
+
+---
+
+## Conocimiento EFC
+
+- **Identidad y líneas de EFC** (8 líneas, subcategorías, marcas públicas, posicionamiento): ver `knowledge/efc.md`.
+- EFC **no tiene eslogan en prosa por línea** — el material oficial es subcategorías + marcas (en `knowledge/efc.md`).
+
+## Librería de assets visuales
+
+El skill trae una librería **offline** de imágenes en `assets/library/`, indexada en `assets/library/manifest.json`
+(cada asset con `tipo`, `linea`, `tags`, `licencia`). Leer el manifest para elegir por tag.
+
+- `lineas/escena_<linea>.jpg` — **8 escenas de faena** (una por línea EFC, propias de EFC). Ideales como **fondo
+  full-bleed** detrás de un slide (con velo oscuro 0.80–0.94 para legibilidad — ver lección de fondo dinámico).
+- `marcas/marcas_*.png` — **paneles de marcas** (gráficos propios de EFC que muestran, agrupadas por
+  rubro, las marcas que EFC distribuye). Útiles para el slide "marcas representativas".
+- `productos/` — fotos de productos/máquinas EFC genéricas (`producto_<slug>_hero.jpg`).
+- **Naming consistente con `efcvisual`**: `escena_<linea>.jpg`, `producto_<slug>_hero.jpg`, `marca_<slug>_logo.<ext>`.
+
+### 🟢 Regla de derechos (qué va en el repo)
+- ✅ **Assets propios de EFC**: logo, escenas de línea, **paneles de marcas que EFC distribuye**, fotos de
+  productos/máquinas EFC. EFC es distribuidor autorizado de esas marcas y los logos ya son públicos en efc.com.pe.
+- ✅ **Licencia libre (CC0)** con crédito en el manifest.
+- 🟡 **Logo de marca individual** (transparente, alta resolución, SVG): usar **`efcvisual`** (skill hermano)
+  que lo baja **oficial y al momento** — mejor que mantener decenas de logos estáticos que se desactualizan.
+- ❌ **Nunca** fotos con **marca/branding de un CLIENTE** (revela relación comercial) — usar versiones genéricas.
+
+---
+
+## Recursos del skill
+
+- `design-system/tokens.css` — variables, paleta, tipografía de sistema
+- `design-system/deck.css` — componentes deck · `guide.css` — componentes guía · `runtime.js` — navegación
+- `lint/forbidden-terms.json` + `lint/lint.py` — validador de tono
+- `extractors/from_pptx.py` · `from_pdf.py` · `from_html.py` — extraen texto+imágenes de presentaciones viejas
+- `exporters/to_pdf.py` — genera `{slug}.pdf` con Chrome headless (sin Playwright/Node)
+- `assets/efc_logo.png` — logo oficial (embeber en base64)
+- `examples/` — ejemplo de referencia (cliente ficticio)
+
+### Prerequisitos (local, sin servidor)
+- **Chrome o Chromium** instalado (lo usa `to_pdf.py` en modo headless) + **Poppler** (`pdftoppm`, `pdfinfo`) para validar.
+- **Python 3** con `python-pptx` y `pdfminer.six` **solo si** usás los extractores (`pip install python-pptx pdfminer.six`).
+- **ImageMagick** (`magick`) recomendado para preparar imágenes (upscale, recortes, viñetas).
+
+---
+
+## Exporter PDF · reglas duras
+
+Usar SIEMPRE `exporters/to_pdf.py` (Chrome headless). Pasarle la **carpeta del deck**, no el HTML. Dos modos auto-detectados:
+
+| Modo | Cuándo | Cómo |
+|---|---|---|
+| **PRINT** (default) | Texto sobre negro | Reflow vectorial: cada `.slide`→720px, encoge con `zoom`, anula `text-shadow`. PDF liviano y nítido. |
+| **RASTER** | Image-forward (fondo a sangre `<img class="bg">`) | Rasteriza cada slide @2× y une PNG→PDF. Fiel al full-bleed; pesa más. |
+
+Bugs ya resueltos dentro de la tool (no re-descubrir): encoger con **`zoom`** y no `transform:scale` en print; `* { text-shadow:none !important }` para evitar sombras horneadas sobre las letras; **regex tolerante a espacios** que neutraliza `@media (max-width:≤1000px)` (sin esto, el PDF renderiza el layout móvil apilado). Validar siempre: `páginas del PDF == nº de <section class="slide">`.
+
+---
+
+## Lecciones de craft (genéricas, ya pagadas)
+
+### 🟢 Sello "PENDIENTE" · estampa para data que aún no llega (defensivo + CTA)
+Cuando se entrega con datos placeholder (un área aún no mandó cifras), poner una estampa visible
+en vez de ocultar: cubre al autor y es llamado a la acción.
+```css
+.sello{position:absolute;top:84px;right:54px;z-index:6;transform:rotate(-7deg);
+  border:3px dashed var(--amber);border-radius:12px;background:rgba(245,158,11,0.10);
+  padding:11px 20px 9px;text-align:center;pointer-events:none;text-shadow:none}
+.sello b{display:block;font-size:1.2rem;font-weight:900;letter-spacing:4px;color:var(--amber)}
+.sello span{display:block;font-size:0.68rem;font-weight:700;letter-spacing:1.4px;color:var(--amber);text-transform:uppercase}
+```
+`<div class="sello"><b>PENDIENTE</b><span>a la espera de datos · ÁREA</span></div>` (nombrar el área = CTA).
+
+### 🟢 Extraer cifras REALES de un PPTX (cuando el extractor solo saca texto)
+Los datos de un gráfico viven en `ppt/charts/chartN.xml` (NO en el texto). `unzip` el `.pptx` y leer
+con regex las categorías (`<c:cat>` → eje X) y cada serie (`<c:ser>` → `<c:tx>` nombre + `<c:val>` valores).
+
+### 🟢 Fotos con borde gris → avatar circular + viñeta CSS (no recortar a mano)
+Headshots circulares sobre gris: NO recortarlos (impreciso). Avatar circular + viñeta que oscurece
+solo el borde para fundir el gris con el fondo negro:
+```css
+.avatar::after{content:'';position:absolute;inset:0;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle at 50% 46%,transparent 52%,rgba(10,14,10,0.9) 100%)}
+```
+
+### 🟢 Componente "divisiones/portafolio interactivo" + fondo dinámico
+Tiles con ícono → hover resalta y un panel muestra contenido dinámico (cobertura + marcas).
+Opcional: fondo full-bleed por categoría con crossfade y **velo oscuro fuerte (0.80–0.94 negro)**
+para legibilidad. 🔴 **Gotcha:** `transform:scale()` en un fondo full-bleed `position:absolute;inset:0`
+SUMA al `scrollHeight` (~2%≈16px) aunque haya `overflow:hidden` → usar `background-size`, nunca `scale`.
+🟡 Fondos: **escena real (faena), NO producto sobre blanco** (bajo el velo queda oscuro y vacío).
+
+### 🟡 Menos es más en paneles de detalle
+Frase de gancho + descripción concreta JUNTAS satura. Si hay la descripción concreta, esa basta.
+
+---
+
+## Para el equipo: cómo usar este skill
+
+1. Instalá el skill en `~/.claude/skills/pptefc/` (cloná el repo).
+2. Abrí Claude Code y decí: *"Armemos un deck para [cliente] sobre [producto]. Acá está la cotización y el datasheet."*
+3. Claude lee los archivos, pregunta lo necesario, genera el deck **auto-contenido**, aplica el lint,
+   muestra preview, itera, y genera el PDF.
+4. Adjuntás el `index.html` (o el PDF) al correo. **Funciona sin internet, sin servidor, sin cuentas.**

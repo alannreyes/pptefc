@@ -1,0 +1,124 @@
+/* ==========================================================================
+   EFC Design System — Tokens
+   --------------------------------------------------------------------------
+   Variables canónicas. NO inventar colores ni tipografías por fuera de aquí.
+   Sample del verde EFC: RGB(107, 176, 23) = #6BB017 (extraído del logo oficial).
+   ========================================================================== */
+
+:root {
+  /* ── Marca EFC ─────────────────────────────────────────────────────────── */
+  --efc:        #6BB017;       /* verde corporativo (sampled del logo) */
+  --efc-bright: #8AC42F;       /* verde luminoso (acentos, hover, KPIs) */
+  --efc-soft:   #1f3009;       /* sombra/fondo de cards verdes */
+
+  /* ── Acento secundario (cliente, fabricantes, productos) ─────────────── */
+  --orange:     #FF7A00;       /* naranja · acento de producto/fabricante */
+
+  /* ── Estados / utilitarios ─────────────────────────────────────────────── */
+  --red:        #E85050;       /* alerta, peligro */
+  --blue:       #40A0DC;       /* informativo neutro */
+  --gold:       #D4A017;       /* badge premium / valor */
+
+  /* ── Fondos ────────────────────────────────────────────────────────────── */
+  --bg-deck:    #000000;       /* deck cinematográfico */
+  --bg-guide:   #0a0f1a;       /* guía panorámica (casi-negro azulado) */
+  --bg-light:   #ffffff;       /* solo si la pieza requiere fondo claro */
+
+  /* ── Tarjetas glass (sobre fondos oscuros con video) ───────────────────── */
+  --card:        rgba(8, 8, 12, 0.72);
+  --card-border: rgba(255, 255, 255, 0.14);
+
+  /* ── Blancos translúcidos para jerarquía tipográfica ───────────────────── */
+  --w80: rgba(255, 255, 255, 0.85);   /* cuerpo principal */
+  --w60: rgba(255, 255, 255, 0.65);   /* secundario */
+  --w40: rgba(255, 255, 255, 0.40);   /* labels / footers */
+  --w30: rgba(255, 255, 255, 0.30);   /* dividers */
+  --w20: rgba(255, 255, 255, 0.20);   /* dividers sutiles */
+
+  /* ── Tipografía ────────────────────────────────────────────────────────── */
+  --font: "Helvetica Neue", "Inter", "Calibri", system-ui, -apple-system,
+          "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "Menlo", monospace;
+
+  /* Escala tipográfica (fluida con clamp) */
+  --t-titanic: clamp(3rem, 8.5vw, 9rem);     /* portada deck */
+  --t-huge:    clamp(2.2rem, 6.5vw, 6.5rem); /* títulos sección importantes */
+  --t-big:     clamp(1.8rem, 4.5vw, 4.5rem); /* títulos sección regulares */
+  --t-h2:      clamp(1.5rem, 3vw, 2.4rem);   /* h2 dentro de cards */
+  --t-h3:      clamp(1.1rem, 2vw, 1.6rem);
+  --t-lede:    clamp(1.05rem, 1.6vw, 1.65rem);
+  --t-body:    clamp(0.95rem, 1.15vw, 1.15rem);
+  --t-small:   0.85rem;
+  --t-eyebrow: 0.85rem;        /* tagline de sección, en mayúsculas */
+  --t-kpi-val: clamp(2.4rem, 5vw, 4.8rem);
+
+  /* ── Espaciado (proporcional a 1rem = 16 px) ───────────────────────────── */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.5rem;
+  --sp-6: 2rem;
+  --sp-7: 3rem;
+  --sp-8: 4rem;
+
+  /* ── Radios y sombras ──────────────────────────────────────────────────── */
+  --radius-sm: 8px;
+  --radius:    14px;
+  --radius-lg: 22px;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.20);
+  --shadow:    0 4px 14px rgba(0, 0, 0, 0.30);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.45);
+
+  /* Drop shadow para texto sobre video/imagen — mantiene legibilidad sin oscurecer fondo */
+  --text-shadow:   0 2px 18px rgba(0, 0, 0, 0.55), 0 0 2px rgba(0, 0, 0, 0.4);
+  --text-shadow-l: 0 1px 8px rgba(0, 0, 0, 0.55);
+
+  /* Drop shadow para logo sobre fondos brillosos */
+  --logo-shadow: drop-shadow(0 0 6px rgba(0, 0, 0, 0.45));
+
+  /* ── Z-index estandarizado ─────────────────────────────────────────────── */
+  --z-bg-video: -2;
+  --z-bg-veil:  -1;
+  --z-base:      1;
+  --z-nav:      10;
+  --z-modal:    50;
+
+  /* ── Velos sobre video de fondo (mantener video visible) ───────────────── */
+  --veil-deck-radial: radial-gradient(
+    ellipse at 50% 40%,
+    rgba(0, 0, 0, 0.05) 0%,
+    rgba(0, 0, 0, 0.25) 60%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
+  --veil-deck-linear: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.18),
+    rgba(0, 0, 0, 0.32)
+  );
+  /* Velo local por slide (encima del global) — sutil, no tapa video */
+  --veil-slide: radial-gradient(
+    ellipse at 50% 40%,
+    rgba(0, 0, 0, 0.0) 0%,
+    rgba(0, 0, 0, 0.20) 70%,
+    rgba(0, 0, 0, 0.40) 100%
+  );
+}
+
+/* ==========================================================================
+   Reset minimal
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--bg-deck);
+  color: #fff;
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }

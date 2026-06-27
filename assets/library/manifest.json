@@ -1,0 +1,24 @@
+{
+  "_comment": "Librería de assets visuales para pptefc. SOLO assets propios de EFC o de licencia libre (CC0). Logos/fotos de marcas de terceros NO van aquí — se obtienen on-demand con el skill efcvisual, o de la carpeta gateada @efc.com.pe (ver SKILL.md). Naming: escena_<linea>.jpg, producto_<slug>_hero.jpg, marca_<slug>_logo.<ext> (consistente con efcvisual).",
+  "version": 1,
+  "owner": "EFC (Electro Ferro Centro S.A.C.)",
+  "assets": [
+    { "file": "lineas/escena_seguridad-industrial.jpg", "tipo": "escena", "linea": "Seguridad Industrial", "fuente": "efc.com.pe (banner de línea)", "licencia": "EFC", "tags": ["faena", "epp", "operario", "amoladora", "fondo-oscuro", "fondo-full-bleed"] },
+    { "file": "lineas/escena_electricos-e-instrumentacion.jpg", "tipo": "escena", "linea": "Eléctricos, Iluminación e Instrumentación", "fuente": "efc.com.pe (banner de línea)", "licencia": "EFC", "tags": ["cable", "cobre", "electrico", "fondo-claro"] },
+    { "file": "lineas/escena_herramientas-industriales.jpg", "tipo": "escena", "linea": "Herramientas y Maquinaria Industrial", "fuente": "efc.com.pe (banner de línea)", "licencia": "EFC", "tags": ["herramientas", "alicate", "guantes", "fondo-full-bleed"] },
+    { "file": "lineas/escena_ferreteria-industrial.jpg", "tipo": "escena", "linea": "Ferretería Industrial", "fuente": "efc.com.pe (banner de línea)", "licencia": "EFC", "tags": ["ferreteria", "herramientas", "fondo-oscuro", "fondo-full-bleed"] },
+    { "file": "lineas/escena_materiales-de-construccion.jpg", "tipo": "escena", "linea": "Materiales de Construcción", "fuente": "efc.com.pe (banner de línea)", "licencia": "EFC", "tags": ["construccion", "obra", "trabajadores", "fondo-full-bleed"] },
+    { "file": "lineas/escena_mantenimiento-y-limpieza.jpg", "tipo": "escena", "linea": "Mantenimiento y Limpieza", "fuente": "efc.com.pe (banner de línea)", "licencia": "EFC", "tags": ["limpieza", "mantenimiento", "guante", "fondo-claro"] },
+    { "file": "lineas/escena_equipamiento-de-campamentos.jpg", "tipo": "escena", "linea": "Equipamiento de Campamentos", "fuente": "efc.com.pe (banner de línea)", "licencia": "EFC", "tags": ["campamento", "equipo", "fondo-oscuro", "fondo-full-bleed"] },
+    { "file": "lineas/escena_abastecimiento-integral.jpg", "tipo": "escena", "linea": "Abastecimiento Integral", "fuente": "efc.com.pe (banner de línea)", "licencia": "EFC", "tags": ["almacen", "abastecimiento", "operario", "casco", "fondo-full-bleed"] },
+
+    { "file": "marcas/marcas_materiales-repuestos-instrumentacion.png", "tipo": "panel-marcas", "linea": "Materiales · Repuestos · Instrumentación", "fuente": "gráfico propio EFC (marcas que distribuye)", "licencia": "EFC / marcas de sus respectivos dueños", "tags": ["marcas", "logos", "instrumentacion", "repuestos", "panel"] },
+    { "file": "marcas/marcas_herramientas-iluminacion-ferreteria.png", "tipo": "panel-marcas", "linea": "Herramientas · Iluminación · Ferretería Industrial", "fuente": "gráfico propio EFC (marcas que distribuye)", "licencia": "EFC / marcas de sus respectivos dueños", "tags": ["marcas", "logos", "herramientas", "iluminacion", "ferreteria", "panel"] },
+    { "file": "marcas/marcas_electricos.png", "tipo": "panel-marcas", "linea": "Materiales y Equipos Eléctricos", "fuente": "gráfico propio EFC (marcas que distribuye)", "licencia": "EFC / marcas de sus respectivos dueños", "tags": ["marcas", "logos", "electricos", "panel"] }
+  ],
+  "pendientes": {
+    "productos": "Fotos de productos/máquinas EFC (genéricas, sin marca de cliente). Naming: producto_<slug>_hero.jpg.",
+    "escenas-cc0": "Escenas industriales de licencia libre (Unsplash/Pexels/CC0) con crédito en este manifest.",
+    "logos-individuales": "Para un logo de marca individual (transparente, alta resolución), usar el skill efcvisual (lo baja oficial al momento). Los paneles marcas/* son gráficos propios de EFC con las marcas que distribuye."
+  }
+}

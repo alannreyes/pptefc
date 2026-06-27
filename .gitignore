@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.DS_Store
+_p-*.png
+_p-*.jpg
+_pdf.html
+*.tmp
