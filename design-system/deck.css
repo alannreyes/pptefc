@@ -1106,8 +1106,71 @@ ul.big li .n {
   border: 1px dashed var(--efc-bright); border-bottom: none; }
 .bc-label { font-size: 0.88rem; color: var(--w60); font-weight: 600; font-variant-numeric: tabular-nums; }
 
+/* ── Ecosistema · hub central + satélites (3×3 con líneas) ──────────────── */
+.ecosystem { position: relative; display: grid; grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr); gap: 1.4rem; max-width: 940px; margin: var(--sp-7) auto 0; }
+.eco-lines { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.eco-node { position: relative; z-index: 1; background: var(--card); border: 1px solid var(--card-border);
+  border-radius: 14px; padding: 1rem .9rem; text-align: center;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .25rem; }
+.eco-node.hub { grid-column: 2; grid-row: 2; background: linear-gradient(135deg, var(--efc), var(--efc-soft)); border: none; }
+.eco-role { font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; color: var(--efc-bright); font-weight: 800; }
+.eco-name { font-size: .95rem; font-weight: 700; color: #fff; line-height: 1.2; }
+.eco-node.hub .eco-role { color: rgba(0,0,0,.65); }
+.eco-node.hub .eco-name { color: #000; font-size: 1.15rem; }
+
+/* ── Mapa de sedes · pins sobre lienzo ──────────────────────────────────── */
+.sedes-map { position: relative; margin-top: var(--sp-6); height: 50vh; min-height: 340px;
+  border: 1px solid var(--card-border); border-radius: var(--radius); overflow: hidden;
+  background-color: var(--card);
+  background-image: radial-gradient(circle, rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size: 22px 22px; }
+.pin { position: absolute; transform: translate(-50%, -100%);
+  display: flex; flex-direction: column; align-items: center; }
+.pin .pin-card { margin-bottom: .55rem; background: rgba(8,11,8,.92); border: 1px solid var(--efc-bright);
+  border-radius: 10px; padding: .45rem .8rem; text-align: center; white-space: nowrap; }
+.pin .pin-name { font-size: .9rem; font-weight: 800; color: #fff; }
+.pin .pin-role { font-size: .7rem; color: var(--efc-bright); letter-spacing: .08em; text-transform: uppercase; }
+.pin .dot { width: 16px; height: 16px; border-radius: 50%; background: var(--efc-bright);
+  box-shadow: 0 0 0 6px rgba(138,196,47,.18), 0 0 16px var(--efc-bright); }
+
+/* ── Donut + ícono central + stats laterales ────────────────────────────── */
+.donut-stats { display: grid; grid-template-columns: auto 1fr; gap: var(--sp-8);
+  align-items: center; margin-top: var(--sp-6); }
+.ds-ring { position: relative; width: 260px; height: 260px; flex: 0 0 auto; }
+.ds-ring > svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.ds-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--efc-bright); }
+.ds-center svg { width: 64px; height: 64px; }
+.ds-list { display: flex; flex-direction: column; gap: var(--sp-4); }
+.ds-row { display: grid; grid-template-columns: 4.5rem 1fr; gap: 1rem; align-items: baseline;
+  padding-bottom: var(--sp-3); border-bottom: 1px solid var(--w20); }
+.ds-pct { font-size: 1.9rem; font-weight: 800; color: var(--efc-bright); line-height: 1; }
+.ds-row.b .ds-pct { color: var(--efc); }
+.ds-row.c .ds-pct { color: var(--orange); }
+.ds-l { font-size: 1.05rem; font-weight: 700; color: #fff; }
+.ds-txt p { font-size: .86rem; color: var(--w60); line-height: 1.4; margin-top: .2rem; }
+
+/* ── Grid de íconos · tarjetas ícono-forward ────────────────────────────── */
+.icongrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; margin-top: var(--sp-7); }
+.icard { background: var(--card); border: 1px solid var(--card-border); border-radius: 14px;
+  padding: 1.6rem 1.2rem; text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: .6rem; }
+.icard .ic { width: 56px; height: 56px; border-radius: 14px;
+  background: linear-gradient(135deg, rgba(107,176,23,.2), rgba(107,176,23,.04));
+  border: 1px solid var(--card-border); color: var(--efc-bright);
+  display: flex; align-items: center; justify-content: center; }
+.icard .ic svg { width: 30px; height: 30px; }
+.icard h4 { font-size: 1.05rem; font-weight: 700; color: #fff; }
+.icard p { font-size: .82rem; color: var(--w60); line-height: 1.4; }
+
 @media (max-width: 900px) {
   /* Infografías nuevas → apilado vertical en mobile */
+  .ecosystem      { display: flex; flex-direction: column; }
+  .eco-lines      { display: none; }
+  .eco-node.hub   { order: -1; }
+  .donut-stats    { grid-template-columns: 1fr; justify-items: center; text-align: left; }
+  .icongrid       { grid-template-columns: repeat(2, 1fr); }
+  .sedes-map      { height: auto; min-height: 300px; }
   .roadmap        { grid-auto-flow: row; gap: var(--sp-4); }
   .roadmap::before{ left: 23px; right: auto; top: 0; bottom: 0; width: 2px; height: auto; }
   .rm-phase       { text-align: left; padding: 0 0 0 64px; }

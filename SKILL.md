@@ -152,6 +152,10 @@ Antes de generar, **contar las palabras del slide más cargado**. Si supera 60 t
 | **Stat-infografía** | `<div class="stats"><div class="stat"><div class="stat-ico">svg</div><div class="stat-n">38<small>%</small></div><div class="stat-l">…</div><p>…</p></div>…</div>` (`.stat.orange` para acento) |
 | **Pasos de proceso** | `<div class="steps"><div class="step"><div class="step-n">01</div><h4>…</h4><p>…</p></div><div class="step-arrow">→</div>…</div>` |
 | **Bar chart** | `<div class="barchart"><div class="bc-col"><div class="bc-val">$7.4<small>M</small></div><div class="bc-track"><div class="bc-fill" style="height:74%"></div></div><div class="bc-label">2023</div></div>…</div>` (`.bc-fill.proj` = proyectado punteado) |
+| **Ecosistema** | `<div class="ecosystem"><svg class="eco-lines" viewBox="0 0 100 100" preserveAspectRatio="none">…líneas desde 50,50…</svg><div class="eco-node hub">…</div><div class="eco-node">…</div>×8</div>` (3×3, hub al centro) |
+| **Mapa de sedes** | `<div class="sedes-map"><div class="pin" style="left:%;top:%"><div class="pin-card">…</div><div class="dot"></div></div>…</div>` |
+| **Donut + stats** | `<div class="donut-stats"><div class="ds-ring"><svg viewBox="0 0 240 240">…circles con stroke-dasharray…</svg><div class="ds-center">svg</div></div><div class="ds-list"><div class="ds-row"><div class="ds-pct">50%</div><div class="ds-txt"><div class="ds-l">…</div><p>…</p></div></div>…</div></div>` |
+| **Grid de íconos** | `<div class="icongrid"><div class="icard"><div class="ic">svg</div><h4>…</h4><p>…</p></div>×4</div>` |
 | **Otros** | `.versus`/`.compare` · `.principles`/`.principle` (2 frentes) · `.axes`/`.axis` (2×2) · `.moments` · `.hitos` · `.curves` · `.ask` · `.value-chain` · `.stack` |
 
 Color: `<span class="green">` (acento EFC) · `.orange` (cliente/producto) · `.muted`/`.dim`.

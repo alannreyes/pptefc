@@ -1236,8 +1236,71 @@ ul.big li .n {
   border: 1px dashed var(--efc-bright); border-bottom: none; }
 .bc-label { font-size: 0.88rem; color: var(--w60); font-weight: 600; font-variant-numeric: tabular-nums; }
 
+/* ── Ecosistema · hub central + satélites (3×3 con líneas) ──────────────── */
+.ecosystem { position: relative; display: grid; grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr); gap: 1.4rem; max-width: 940px; margin: var(--sp-7) auto 0; }
+.eco-lines { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.eco-node { position: relative; z-index: 1; background: var(--card); border: 1px solid var(--card-border);
+  border-radius: 14px; padding: 1rem .9rem; text-align: center;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .25rem; }
+.eco-node.hub { grid-column: 2; grid-row: 2; background: linear-gradient(135deg, var(--efc), var(--efc-soft)); border: none; }
+.eco-role { font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; color: var(--efc-bright); font-weight: 800; }
+.eco-name { font-size: .95rem; font-weight: 700; color: #fff; line-height: 1.2; }
+.eco-node.hub .eco-role { color: rgba(0,0,0,.65); }
+.eco-node.hub .eco-name { color: #000; font-size: 1.15rem; }
+
+/* ── Mapa de sedes · pins sobre lienzo ──────────────────────────────────── */
+.sedes-map { position: relative; margin-top: var(--sp-6); height: 50vh; min-height: 340px;
+  border: 1px solid var(--card-border); border-radius: var(--radius); overflow: hidden;
+  background-color: var(--card);
+  background-image: radial-gradient(circle, rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size: 22px 22px; }
+.pin { position: absolute; transform: translate(-50%, -100%);
+  display: flex; flex-direction: column; align-items: center; }
+.pin .pin-card { margin-bottom: .55rem; background: rgba(8,11,8,.92); border: 1px solid var(--efc-bright);
+  border-radius: 10px; padding: .45rem .8rem; text-align: center; white-space: nowrap; }
+.pin .pin-name { font-size: .9rem; font-weight: 800; color: #fff; }
+.pin .pin-role { font-size: .7rem; color: var(--efc-bright); letter-spacing: .08em; text-transform: uppercase; }
+.pin .dot { width: 16px; height: 16px; border-radius: 50%; background: var(--efc-bright);
+  box-shadow: 0 0 0 6px rgba(138,196,47,.18), 0 0 16px var(--efc-bright); }
+
+/* ── Donut + ícono central + stats laterales ────────────────────────────── */
+.donut-stats { display: grid; grid-template-columns: auto 1fr; gap: var(--sp-8);
+  align-items: center; margin-top: var(--sp-6); }
+.ds-ring { position: relative; width: 260px; height: 260px; flex: 0 0 auto; }
+.ds-ring > svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.ds-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: var(--efc-bright); }
+.ds-center svg { width: 64px; height: 64px; }
+.ds-list { display: flex; flex-direction: column; gap: var(--sp-4); }
+.ds-row { display: grid; grid-template-columns: 4.5rem 1fr; gap: 1rem; align-items: baseline;
+  padding-bottom: var(--sp-3); border-bottom: 1px solid var(--w20); }
+.ds-pct { font-size: 1.9rem; font-weight: 800; color: var(--efc-bright); line-height: 1; }
+.ds-row.b .ds-pct { color: var(--efc); }
+.ds-row.c .ds-pct { color: var(--orange); }
+.ds-l { font-size: 1.05rem; font-weight: 700; color: #fff; }
+.ds-txt p { font-size: .86rem; color: var(--w60); line-height: 1.4; margin-top: .2rem; }
+
+/* ── Grid de íconos · tarjetas ícono-forward ────────────────────────────── */
+.icongrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; margin-top: var(--sp-7); }
+.icard { background: var(--card); border: 1px solid var(--card-border); border-radius: 14px;
+  padding: 1.6rem 1.2rem; text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: .6rem; }
+.icard .ic { width: 56px; height: 56px; border-radius: 14px;
+  background: linear-gradient(135deg, rgba(107,176,23,.2), rgba(107,176,23,.04));
+  border: 1px solid var(--card-border); color: var(--efc-bright);
+  display: flex; align-items: center; justify-content: center; }
+.icard .ic svg { width: 30px; height: 30px; }
+.icard h4 { font-size: 1.05rem; font-weight: 700; color: #fff; }
+.icard p { font-size: .82rem; color: var(--w60); line-height: 1.4; }
+
 @media (max-width: 900px) {
   /* Infografías nuevas → apilado vertical en mobile */
+  .ecosystem      { display: flex; flex-direction: column; }
+  .eco-lines      { display: none; }
+  .eco-node.hub   { order: -1; }
+  .donut-stats    { grid-template-columns: 1fr; justify-items: center; text-align: left; }
+  .icongrid       { grid-template-columns: repeat(2, 1fr); }
+  .sedes-map      { height: auto; min-height: 300px; }
   .roadmap        { grid-auto-flow: row; gap: var(--sp-4); }
   .roadmap::before{ left: 23px; right: auto; top: 0; bottom: 0; width: 2px; height: auto; }
   .rm-phase       { text-align: left; padding: 0 0 0 64px; }
@@ -1358,6 +1421,41 @@ ul.big li .n {
 <section class="slide"><div class="eyebrow">Componente · principles</div><h2 class="big">Dos <span class="green">frentes</span>.</h2><div class="principles"><div class="principle left"><div class="num">Frente 01</div><h2>Capacidad <span class="accent">propia</span></h2><p class="lead">Importación, homologación y logística propias.</p></div><div class="principle right"><div class="num">Frente 02</div><h2>Marcas <span class="accent">del mundo</span></h2><p class="lead">Fabricantes globales, curados para minería.</p></div></div></section>
 <section class="slide"><div class="eyebrow">Componente · specs</div><h2 class="big">Ficha <span class="green">técnica</span>.</h2><div class="specs"><div class="row"><div class="k">Líneas</div><div class="v">8 divisiones</div></div><div class="row"><div class="k">Sedes</div><div class="v">Surquillo · Chorrillos · AQP · Miami</div></div><div class="row"><div class="k">Homologación</div><div class="v">SGS Calificación A · 100%</div></div><div class="row"><div class="k">Desde</div><div class="v">1970</div></div></div></section>
 <section class="slide"><div class="eyebrow">Componente · case (referencia)</div><h2 class="big">Caso <span class="green">real</span>.</h2><div class="case"><div class="who">Minera Ejemplo</div><h3>Consolidación de abastecimiento</h3><div class="where">Operación minera · sur del Perú</div><blockquote>"Pasamos de decenas de proveedores a una sola interlocución."</blockquote><div class="kpi-line">−40% tiempo de gestión</div></div></section>
+
+<section class="slide"><div class="eyebrow">Componente NUEVO · ecosystem</div><h2 class="big">Un proveedor, <span class="green">todo conectado</span>.</h2>
+<div class="ecosystem"><svg class="eco-lines" viewBox="0 0 100 100" preserveAspectRatio="none"><g stroke="rgba(138,196,47,.2)" stroke-width=".4"><line x1="50" y1="50" x2="17" y2="17"/><line x1="50" y1="50" x2="50" y2="17"/><line x1="50" y1="50" x2="83" y2="17"/><line x1="50" y1="50" x2="17" y2="50"/><line x1="50" y1="50" x2="83" y2="50"/><line x1="50" y1="50" x2="17" y2="83"/><line x1="50" y1="50" x2="50" y2="83"/><line x1="50" y1="50" x2="83" y2="83"/></g></svg><div class="eco-node"><div class="eco-role">Línea</div><div class="eco-name">Seguridad</div></div><div class="eco-node"><div class="eco-role">Línea</div><div class="eco-name">Eléctricos</div></div><div class="eco-node"><div class="eco-role">Línea</div><div class="eco-name">Herramientas</div></div><div class="eco-node"><div class="eco-role">Línea</div><div class="eco-name">Ferretería</div></div><div class="eco-node hub"><div class="eco-role">Central de compras</div><div class="eco-name">EFC</div></div><div class="eco-node"><div class="eco-role">Línea</div><div class="eco-name">Construcción</div></div><div class="eco-node"><div class="eco-role">Línea</div><div class="eco-name">Mantenimiento</div></div><div class="eco-node"><div class="eco-role">Línea</div><div class="eco-name">Campamentos</div></div><div class="eco-node"><div class="eco-role">Línea</div><div class="eco-name">Abastecimiento</div></div></div></section>
+
+<section class="slide"><div class="eyebrow">Componente NUEVO · mapa de sedes</div><h2 class="big">Cuatro <span class="green">sedes</span>, una red.</h2>
+<div class="sedes-map">
+  <div class="pin" style="left:66%;top:22%"><div class="pin-card"><div class="pin-name">Miami</div><div class="pin-role">Hub importaciones · USA</div></div><div class="dot"></div></div>
+  <div class="pin" style="left:33%;top:54%"><div class="pin-card"><div class="pin-name">Surquillo</div><div class="pin-role">Sede principal · Lima</div></div><div class="dot"></div></div>
+  <div class="pin" style="left:55%;top:70%"><div class="pin-card"><div class="pin-name">Chorrillos</div><div class="pin-role">CD principal · Lima</div></div><div class="dot"></div></div>
+  <div class="pin" style="left:38%;top:90%"><div class="pin-card"><div class="pin-name">Arequipa</div><div class="pin-role">Sede sur</div></div><div class="dot"></div></div>
+</div></section>
+
+<section class="slide"><div class="eyebrow">Componente NUEVO · donut + stats</div><h2 class="big">Mix de <span class="green">abastecimiento</span>.</h2>
+<div class="donut-stats">
+  <div class="ds-ring"><svg viewBox="0 0 240 240">
+    <circle cx="120" cy="120" r="100" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="26"/>
+    <circle cx="120" cy="120" r="100" fill="none" stroke="var(--efc-bright)" stroke-width="26" stroke-dasharray="314 628"/>
+    <circle cx="120" cy="120" r="100" fill="none" stroke="var(--efc)" stroke-width="26" stroke-dasharray="188 628" stroke-dashoffset="-314"/>
+    <circle cx="120" cy="120" r="100" fill="none" stroke="var(--orange)" stroke-width="26" stroke-dasharray="126 628" stroke-dashoffset="-502"/>
+  </svg><div class="ds-center"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22" x2="12" y2="12"/></svg></div></div>
+  <div class="ds-list">
+    <div class="ds-row"><div class="ds-pct">50%</div><div class="ds-txt"><div class="ds-l">EPP y seguridad</div><p>La línea de mayor rotación.</p></div></div>
+    <div class="ds-row b"><div class="ds-pct">30%</div><div class="ds-txt"><div class="ds-l">Eléctricos y ferretería</div><p>Materiales para entornos críticos.</p></div></div>
+    <div class="ds-row c"><div class="ds-pct">20%</div><div class="ds-txt"><div class="ds-l">Resto del portafolio</div><p>Construcción, MRO y más.</p></div></div>
+  </div>
+</div></section>
+
+<section class="slide"><div class="eyebrow">Componente NUEVO · grid de íconos</div><h2 class="big">Servicio <span class="green">integral</span>.</h2>
+<div class="icongrid">
+  <div class="icard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 3 4 6.5 4 9s-1.5 6-4 9c-2.5-3-4-6.5-4-9s1.5-6 4-9z"/></svg></div><h4>Importación</h4><p>Hub propio en Miami.</p></div>
+  <div class="icard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3h13v10H1zM14 7h4l3 3v3h-7z"/><circle cx="5.5" cy="16.5" r="1.5"/><circle cx="17.5" cy="16.5" r="1.5"/></svg></div><h4>Logística</h4><p>Despacho a faena, trazable.</p></div>
+  <div class="icard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div><h4>Homologación</h4><p>SGS Calificación A · 100%.</p></div>
+  <div class="icard"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22" x2="12" y2="12"/></svg></div><h4>Consignación</h4><p>VHS y reposición en sitio.</p></div>
+</div></section>
+
 <section class="slide quote-slide"><div class="quote-mark">&#8220;</div><blockquote>Lo necesitas, <span class="accent">lo hacemos.</span></blockquote><div class="attribution"><span class="name">EFC</span> · desde 1970</div></section>
 <section class="slide center"><div class="eyebrow">Componente · next-list (cierre)</div><h2 class="big"><span class="green">Próximos</span> pasos.</h2><div class="next-list"><div class="next-step"><div class="n">1</div><div><h4>Visita técnica</h4><p>Relevamiento de la operación.</p></div></div><div class="next-step"><div class="n">2</div><div><h4>Cotización consolidada</h4><p>Una sola propuesta.</p></div></div></div></section>
 
