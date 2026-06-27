@@ -229,6 +229,24 @@ El skill trae una librería **offline** de imágenes en `assets/library/`, index
 - **Python 3** con `python-pptx` y `pdfminer.six` **solo si** usás los extractores (`pip install python-pptx pdfminer.six`).
 - **ImageMagick** (`magick`) recomendado para preparar imágenes (upscale, recortes, viñetas).
 
+### 🟢 Ver un PPTX como imágenes (analizar plantillas/PPTs sin LibreOffice)
+`python-pptx` NO renderiza (solo lee texto/estructura). Para **ver** un pptx (cuando te pasan una
+plantilla y querés extraer sus infografías), renderizá cada slide a PNG con **aspose.slides** +
+**mono-libgdiplus** (no necesita LibreOffice):
+```bash
+brew install mono-libgdiplus
+python3.13 -m venv /tmp/pptenv && /tmp/pptenv/bin/pip install aspose.slides   # aspose NO tiene wheel para py3.14: usar 3.13
+DYL=$(brew --prefix mono-libgdiplus)/lib                                       # libgdiplus.0.dylib
+DYLD_LIBRARY_PATH="$DYL" /tmp/pptenv/bin/python -c '
+import aspose.slides as s
+with s.Presentation("plantilla.pptx") as p:
+    for i,sl in enumerate(p.slides,1): sl.get_image(1.2,1.2).save(f"/tmp/s{i:02d}.png", s.ImageFormat.PNG)'
+# luego: magick montage /tmp/s*.png -tile 5x -geometry 300x169 sheet.png  → contact sheet para leerlas
+```
+La versión free de aspose pone una marca de agua "Evaluation only" — sirve para **analizar** (verlas),
+NO para producir deliverables. El flujo correcto: ver la plantilla → **re-vestir sus patrones con la
+identidad EFC** (componentes `deck.css`), nunca copiar su estilo.
+
 ---
 
 ## Exporter PDF · reglas duras
