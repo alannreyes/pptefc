@@ -148,6 +148,10 @@ Antes de generar, **contar las palabras del slide más cargado**. Si supera 60 t
 | **Lista de prioridades** | `<ul class="big"><li><span class="n">01</span> Texto…</li>…</ul>` |
 | **Cierre / próximos pasos** | `<div class="next-list"><div class="next-step"><div class="n">1</div><div><h4>…</h4><p>…</p></div></div>…</div>` |
 | **Cita ancla** (apertura/cierre) | `.quote-slide` (blockquote + attribution) |
+| **Roadmap / timeline** | `<div class="roadmap"><div class="rm-phase done"><div class="rm-dot">1</div><div class="rm-when">Mes 1</div><h4>…</h4><p>…</p></div>…</div>` — N fases numeradas sobre una línea (`.done` = fase cumplida) |
+| **Stat-infografía** | `<div class="stats"><div class="stat"><div class="stat-ico">svg</div><div class="stat-n">38<small>%</small></div><div class="stat-l">…</div><p>…</p></div>…</div>` (`.stat.orange` para acento) |
+| **Pasos de proceso** | `<div class="steps"><div class="step"><div class="step-n">01</div><h4>…</h4><p>…</p></div><div class="step-arrow">→</div>…</div>` |
+| **Bar chart** | `<div class="barchart"><div class="bc-col"><div class="bc-val">$7.4<small>M</small></div><div class="bc-track"><div class="bc-fill" style="height:74%"></div></div><div class="bc-label">2023</div></div>…</div>` (`.bc-fill.proj` = proyectado punteado) |
 | **Otros** | `.versus`/`.compare` · `.principles`/`.principle` (2 frentes) · `.axes`/`.axis` (2×2) · `.moments` · `.hitos` · `.curves` · `.ask` · `.value-chain` · `.stack` |
 
 Color: `<span class="green">` (acento EFC) · `.orange` (cliente/producto) · `.muted`/`.dim`.

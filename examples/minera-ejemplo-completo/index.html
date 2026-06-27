@@ -1176,7 +1176,80 @@ ul.big li .n {
    sobrescribe la regla mobile.
    Testear con preview_resize a 375 / 768 / 1280 / 1920.
    ========================================================================== */
+
+/* ══════════════════════════════════════════════════════════════════════════
+   INFOGRAFÍAS (patrones de plantillas, re-vestidos con identidad EFC)
+   .roadmap · .stats/.stat · .steps/.step · .barchart
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Roadmap / timeline horizontal (N fases numeradas sobre una línea) ───── */
+.roadmap { position: relative; display: grid; grid-auto-flow: column;
+  grid-auto-columns: 1fr; gap: var(--sp-5); margin-top: var(--sp-8); }
+.roadmap::before { content: ""; position: absolute; left: 6%; right: 6%; top: 23px;
+  height: 2px; background: linear-gradient(90deg, var(--efc-soft), var(--efc-bright) 50%, var(--efc-soft)); }
+.rm-phase { position: relative; text-align: center; padding-top: 64px; }
+.rm-phase .rm-dot { position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 48px; height: 48px; border-radius: 50%; background: var(--bg-deck);
+  border: 2px solid var(--efc-bright); color: var(--efc-bright);
+  display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.15rem; }
+.rm-phase.done .rm-dot { background: var(--efc-bright); color: #000; }
+.rm-phase .rm-when { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--efc-bright); font-weight: 700; margin-bottom: var(--sp-2); }
+.rm-phase h4 { font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: var(--sp-2); }
+.rm-phase p { font-size: 0.9rem; color: var(--w60); line-height: 1.45; }
+
+/* ── Stat-infografía (ícono + número/% grande + label + 1 línea) ─────────── */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: var(--sp-5); margin-top: var(--sp-7); }
+.stat { background: var(--card); border: 1px solid var(--card-border);
+  border-top: 3px solid var(--efc-bright); border-radius: var(--radius); padding: var(--sp-5); }
+.stat .stat-ico { width: 48px; height: 48px; border-radius: 12px;
+  background: linear-gradient(135deg, rgba(107,176,23,.20), rgba(107,176,23,.04));
+  border: 1px solid var(--card-border); color: var(--efc-bright);
+  display: flex; align-items: center; justify-content: center; margin-bottom: var(--sp-4); }
+.stat .stat-ico svg { width: 26px; height: 26px; }
+.stat .stat-n { font-size: clamp(2.2rem, 4.5vw, 3.6rem); font-weight: 800; line-height: 1;
+  color: var(--efc-bright); letter-spacing: -0.02em; }
+.stat .stat-n small { font-size: 0.4em; color: #fff; margin-left: 0.2em; font-weight: 700; }
+.stat .stat-l { font-size: 0.92rem; font-weight: 700; color: #fff; margin-top: var(--sp-3); }
+.stat p { font-size: 0.85rem; color: var(--w60); line-height: 1.45; margin-top: var(--sp-2); }
+.stat.orange { border-top-color: var(--orange); }
+.stat.orange .stat-n, .stat.orange .stat-ico { color: var(--orange); }
+
+/* ── Pasos de proceso (01 → 02 → 03 con conectores) ─────────────────────── */
+.steps { display: flex; align-items: stretch; gap: var(--sp-3); margin-top: var(--sp-7); }
+.step { flex: 1; background: var(--card); border: 1px solid var(--card-border);
+  border-top: 3px solid var(--efc-bright); border-radius: var(--radius); padding: var(--sp-5); }
+.step .step-n { font-size: 0.82rem; font-weight: 800; letter-spacing: 0.12em; color: var(--efc-bright); }
+.step h4 { font-size: 1.1rem; font-weight: 700; color: #fff; margin: var(--sp-2) 0; }
+.step p { font-size: 0.88rem; color: var(--w60); line-height: 1.45; }
+.step-arrow { display: flex; align-items: center; justify-content: center;
+  color: var(--efc-bright); font-size: 1.6rem; flex: 0 0 auto; }
+
+/* ── Bar chart simple (CSS) ─────────────────────────────────────────────── */
+.barchart { display: flex; align-items: flex-end; gap: var(--sp-5);
+  margin-top: var(--sp-7); padding-bottom: var(--sp-4); border-bottom: 1px solid var(--w20); }
+.bc-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: var(--sp-2); }
+.bc-val { font-size: 1rem; font-weight: 800; color: var(--efc-bright); font-variant-numeric: tabular-nums; }
+.bc-val small { font-size: 0.7em; color: var(--w60); font-weight: 600; }
+.bc-track { width: 100%; height: 260px; display: flex; align-items: flex-end;
+  background: rgba(255,255,255,.03); border-radius: 6px; }
+.bc-fill { width: 100%; background: linear-gradient(180deg, var(--efc-bright), var(--efc-soft));
+  border-radius: 6px 6px 0 0; box-shadow: inset 0 1px 0 rgba(255,255,255,.15); }
+.bc-fill.proj { background: linear-gradient(180deg, rgba(138,196,47,.3), rgba(31,48,9,.3));
+  border: 1px dashed var(--efc-bright); border-bottom: none; }
+.bc-label { font-size: 0.88rem; color: var(--w60); font-weight: 600; font-variant-numeric: tabular-nums; }
+
 @media (max-width: 900px) {
+  /* Infografías nuevas → apilado vertical en mobile */
+  .roadmap        { grid-auto-flow: row; gap: var(--sp-4); }
+  .roadmap::before{ left: 23px; right: auto; top: 0; bottom: 0; width: 2px; height: auto; }
+  .rm-phase       { text-align: left; padding: 0 0 0 64px; }
+  .rm-phase .rm-dot { left: 0; transform: none; }
+  .steps          { flex-direction: column; }
+  .step-arrow     { transform: rotate(90deg); align-self: center; }
+  .barchart       { height: auto; }
+  .bc-track       { height: 180px; }
   /* Layouts viejos (decks anteriores) */
   .kpi-grid       { grid-template-columns: repeat(2, 1fr); }
   .cards          { grid-template-columns: 1fr; }
@@ -1333,6 +1406,52 @@ ul.big li .n {
     <div class="next-step"><div class="n">1</div><div><h4>Visita técnica</h4><p>Relevamiento de la operación y condiciones de faena.</p></div></div>
     <div class="next-step"><div class="n">2</div><div><h4>Cotización consolidada</h4><p>Una sola propuesta: producto, importación y entrega.</p></div></div>
     <div class="next-step"><div class="n">3</div><div><h4>Plan de abastecimiento</h4><p>Cronograma por línea con indicadores de servicio.</p></div></div>
+  </div>
+</section>
+
+
+<section class="slide">
+  <div class="eyebrow">Plan de implementación</div>
+  <h2 class="big">De la propuesta a la <span class="green">operación</span>.</h2>
+  <div class="roadmap">
+    <div class="rm-phase done"><div class="rm-dot">1</div><div class="rm-when">Mes 1</div><h4>Relevamiento</h4><p>Visita técnica y mapeo de la operación.</p></div>
+    <div class="rm-phase"><div class="rm-dot">2</div><div class="rm-when">Mes 2</div><h4>Homologación</h4><p>Homologación de productos y proveedores.</p></div>
+    <div class="rm-phase"><div class="rm-dot">3</div><div class="rm-when">Mes 3</div><h4>Abastecimiento</h4><p>Primeras entregas y acuerdos marco.</p></div>
+    <div class="rm-phase"><div class="rm-dot">4</div><div class="rm-when">Mes 4+</div><h4>Operación</h4><p>VHS, reposición e indicadores de servicio.</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">El impacto</div>
+  <h2 class="big">Lo que <span class="green">consolidar</span> cambia.</h2>
+  <div class="stats">
+    <div class="stat"><div class="stat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22" x2="12" y2="12"/></svg></div><div class="stat-n">1 <small>proveedor</small></div><div class="stat-l">En vez de decenas</div><p>Una sola interlocución para todas las categorías.</p></div>
+    <div class="stat"><div class="stat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div class="stat-n">−40<small>%</small></div><div class="stat-l">Tiempo de gestión</div><p>Menos órdenes, menos seguimiento, menos retrabajo.</p></div>
+    <div class="stat orange"><div class="stat-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div><div class="stat-n">100<small>%</small></div><div class="stat-l">Homologación SGS A</div><p>Calidad y trazabilidad en cada entrega.</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">Cómo trabajamos</div>
+  <h2 class="big">Un proceso <span class="green">claro</span>, de punta a punta.</h2>
+  <div class="steps">
+    <div class="step"><div class="step-n">01</div><h4>Cotizar</h4><p>Requerimiento único, respuesta consolidada.</p></div>
+    <div class="step-arrow">&#8594;</div>
+    <div class="step"><div class="step-n">02</div><h4>Comprar / importar</h4><p>Nacional e internacional en un solo flujo.</p></div>
+    <div class="step-arrow">&#8594;</div>
+    <div class="step"><div class="step-n">03</div><h4>Entregar</h4><p>Despacho a faena con trazabilidad.</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">Evolución</div>
+  <h2 class="big">Crecimiento del <span class="green">abastecimiento</span>.</h2>
+  <div class="barchart">
+    <div class="bc-col"><div class="bc-val">$1.6<small>M</small></div><div class="bc-track"><div class="bc-fill" style="height:30%"></div></div><div class="bc-label">2022</div></div>
+    <div class="bc-col"><div class="bc-val">$2.8<small>M</small></div><div class="bc-track"><div class="bc-fill" style="height:52%"></div></div><div class="bc-label">2023</div></div>
+    <div class="bc-col"><div class="bc-val">$4.1<small>M</small></div><div class="bc-track"><div class="bc-fill" style="height:76%"></div></div><div class="bc-label">2024</div></div>
+    <div class="bc-col"><div class="bc-val">$5.4<small>M</small></div><div class="bc-track"><div class="bc-fill" style="height:100%"></div></div><div class="bc-label">2025</div></div>
+    <div class="bc-col"><div class="bc-val">$3.2<small>M</small></div><div class="bc-track"><div class="bc-fill proj" style="height:60%"></div></div><div class="bc-label">2026*</div></div>
   </div>
 </section>
 
