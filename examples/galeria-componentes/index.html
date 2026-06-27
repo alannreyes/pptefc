@@ -1296,16 +1296,16 @@ ul.big li .n {
 /* ══ INFOGRAFÍAS DE DOMINIO · proyectos · seguridad · comex · soporte · logística ══ */
 
 /* ── Matriz de riesgo · 3×3 impacto × probabilidad ──────────────────────── */
-.riskmatrix { display: grid; grid-template-columns: 2rem repeat(3, 1fr); grid-template-rows: repeat(3, 1fr) 2rem;
-  gap: 6px; margin: var(--sp-6) auto 0; max-width: 720px; aspect-ratio: 3 / 2; }
-.rm-cell { border-radius: 8px; display: flex; align-items: center; justify-content: center; position: relative; }
+.riskmatrix { display: grid; grid-template-columns: 2.4rem repeat(3, 1fr); grid-template-rows: repeat(3, 1fr) 2.2rem;
+  gap: 10px; margin: var(--sp-6) auto 0; width: 100%; max-width: 820px; aspect-ratio: 3 / 2; }
+.rm-cell { border-radius: 10px; display: flex; align-items: center; justify-content: center; position: relative; }
 .rm-cell.low  { background: rgba(107,176,23,.70); }
 .rm-cell.med  { background: rgba(245,158,11,.80); }
 .rm-cell.high { background: rgba(239,68,68,.85); }
-.rm-dot { width: 28px; height: 28px; border-radius: 50%; background: #0a0e0a; color: #fff;
-  display: flex; align-items: center; justify-content: center; font-size: .85rem; font-weight: 800;
+.rm-dot { width: 40px; height: 40px; border-radius: 50%; background: #0a0e0a; color: #fff;
+  display: flex; align-items: center; justify-content: center; font-size: 1.05rem; font-weight: 800;
   border: 2px solid rgba(255,255,255,.55); }
-.rm-axis { display: flex; align-items: center; justify-content: center; font-size: .68rem;
+.rm-axis { display: flex; align-items: center; justify-content: center; font-size: .78rem;
   letter-spacing: .1em; text-transform: uppercase; color: var(--w60); font-weight: 700; text-align: center; }
 .rm-axis.y { writing-mode: vertical-rl; transform: rotate(180deg); }
 
@@ -1325,11 +1325,11 @@ ul.big li .n {
 
 /* ── Embudo / funnel ────────────────────────────────────────────────────── */
 .funnel { margin: var(--sp-6) auto 0; display: flex; flex-direction: column; align-items: center;
-  gap: .5rem; max-width: 760px; }
+  gap: .8rem; width: 100%; max-width: 920px; }
 .funnel-stage { display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-  padding: .85rem 1.6rem; border-radius: 6px; color: #0a0e0a; }
-.funnel-stage .fs-label { font-weight: 700; font-size: .95rem; }
-.funnel-stage .fs-val { font-weight: 800; font-size: 1.1rem; }
+  padding: 1.5rem 2.2rem; border-radius: 8px; color: #0a0e0a; }
+.funnel-stage .fs-label { font-weight: 700; font-size: 1.15rem; }
+.funnel-stage .fs-val { font-weight: 800; font-size: 1.5rem; }
 
 /* ── Gauges · anillos de progreso (KPIs / performance) ──────────────────── */
 .gauges { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
