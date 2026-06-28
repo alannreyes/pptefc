@@ -1307,6 +1307,18 @@ ul.big li .n {
   border: 2px solid rgba(255,255,255,.55); }
 .rm-axis { display: flex; align-items: center; justify-content: center; font-size: .78rem;
   letter-spacing: .1em; text-transform: uppercase; color: var(--w60); font-weight: 700; text-align: center; }
+/* matriz + leyenda lado a lado (índice de los riesgos numerados) */
+.riskmatrix-wrap { display: grid; grid-template-columns: 1.25fr 1fr; gap: var(--sp-7); align-items: center; margin-top: var(--sp-5); }
+.riskmatrix-wrap .riskmatrix { margin-top: 0; max-width: none; }
+.risk-legend { display: flex; flex-direction: column; gap: var(--sp-4); }
+.rl-item { display: grid; grid-template-columns: auto 1fr; gap: 1rem; align-items: start; }
+.rl-n { width: 34px; height: 34px; border-radius: 50%; background: #0a0e0a; border: 2px solid var(--w40);
+  color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; flex: 0 0 auto; font-size: .9rem; }
+.rl-item.high .rl-n { border-color: var(--red); }
+.rl-item.med .rl-n  { border-color: #f59e0b; }
+.rl-item.low .rl-n  { border-color: var(--efc-bright); }
+.rl-txt strong { color: #fff; font-size: 1.02rem; font-weight: 700; }
+.rl-txt p { color: var(--w60); font-size: .85rem; line-height: 1.4; margin-top: .15rem; }
 .rm-axis.y { writing-mode: vertical-rl; transform: rotate(180deg); }
 
 /* ── Gantt / cronograma ─────────────────────────────────────────────────── */
@@ -1352,6 +1364,7 @@ ul.big li .n {
   .donut-stats    { grid-template-columns: 1fr; justify-items: center; text-align: left; }
   .icongrid       { grid-template-columns: repeat(2, 1fr); }
   .sedes-map      { height: auto; min-height: 300px; }
+  .riskmatrix-wrap{ grid-template-columns: 1fr; }
   .roadmap        { grid-auto-flow: row; gap: var(--sp-4); }
   .roadmap::before{ left: 23px; right: auto; top: 0; bottom: 0; width: 2px; height: auto; }
   .rm-phase       { text-align: left; padding: 0 0 0 64px; }
@@ -1509,12 +1522,20 @@ ul.big li .n {
 
 
 <section class="slide"><div class="eyebrow">Componente NUEVO · matriz de riesgo</div><h2 class="big">Riesgos del <span class="green">proyecto</span>.</h2>
-<div class="riskmatrix">
-  <div class="rm-axis y" style="grid-row:1/4;grid-column:1">Impacto</div>
-  <div class="rm-cell med"></div><div class="rm-cell high"><div class="rm-dot">1</div></div><div class="rm-cell high"><div class="rm-dot">2</div></div>
-  <div class="rm-cell low"></div><div class="rm-cell med"><div class="rm-dot">3</div></div><div class="rm-cell high"></div>
-  <div class="rm-cell low"></div><div class="rm-cell low"><div class="rm-dot">4</div></div><div class="rm-cell med"></div>
-  <div></div><div class="rm-axis">Prob. baja</div><div class="rm-axis">Media</div><div class="rm-axis">Alta</div>
+<div class="riskmatrix-wrap">
+  <div class="riskmatrix">
+    <div class="rm-axis y" style="grid-row:1/4;grid-column:1">Impacto</div>
+    <div class="rm-cell med"></div><div class="rm-cell high"><div class="rm-dot">1</div></div><div class="rm-cell high"><div class="rm-dot">2</div></div>
+    <div class="rm-cell low"></div><div class="rm-cell med"><div class="rm-dot">3</div></div><div class="rm-cell high"></div>
+    <div class="rm-cell low"></div><div class="rm-cell low"><div class="rm-dot">4</div></div><div class="rm-cell med"></div>
+    <div></div><div class="rm-axis">Prob. baja</div><div class="rm-axis">Media</div><div class="rm-axis">Alta</div>
+  </div>
+  <div class="risk-legend">
+    <div class="rl-item high"><span class="rl-n">1</span><div class="rl-txt"><strong>Demora en aduana</strong><p>Nacionalización de importaciones.</p></div></div>
+    <div class="rl-item high"><span class="rl-n">2</span><div class="rl-txt"><strong>Quiebre de stock crítico</strong><p>Ítem sin cobertura en faena.</p></div></div>
+    <div class="rl-item med"><span class="rl-n">3</span><div class="rl-txt"><strong>Variación de tipo de cambio</strong><p>Impacto en costo importado.</p></div></div>
+    <div class="rl-item low"><span class="rl-n">4</span><div class="rl-txt"><strong>Retraso de proveedor local</strong><p>Demora menor, con plan B.</p></div></div>
+  </div>
 </div></section>
 
 <section class="slide"><div class="eyebrow">Componente NUEVO · Gantt / cronograma</div><h2 class="big">Plan de <span class="green">ejecución</span>.</h2>
