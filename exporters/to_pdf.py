@@ -37,6 +37,19 @@ Por que existe (lecciones pagadas en produccion):
 
 Requisitos: Google Chrome instalado. Modo RASTER une PNGs a PDF con img2pdf o
 ImageMagick (magick/convert), lo que haya. No requiere Playwright ni Node.
+
+PDF DE ENTREGA AL CLIENTE (leccion pagada, deck Glencore/Antapaccay):
+  • Slides INTERACTIVOS (hover/tabs como "8 divisiones", carruseles/marquee) en
+    estatico muestran solo 1 estado / recortado. Para el PDF hay que EXPANDIRLOS:
+    una pagina por estado desarrollado, o el marquee -> grilla completa.
+  • Forzar layout de ESCRITORIO: neutralizar @media (max-width: <=1200px) -> si no,
+    donuts/grillas salen en version MOVIL rota (breakpoints tipicos 1100px).
+  • 🔴 NUNCA comprimir el PDF con Ghostscript (gs/pdfwrite). Reescribe las mascaras
+    de transparencia (soft-mask) de PNG/logos y VISTA PREVIA de Mac (Quartz) las
+    muestra EN BLANCO -> abre en unos visores y en otros no. El PDF NATIVO de Chrome
+    funciona en todos lados. Si pesa mucho para correo: reducir las imagenes ORIGEN
+    y re-render con Chrome (sigue nativo), o mandar LINK. ~8-9MB pasa por Gmail
+    (25MB)/Outlook (20MB); ojo topes corporativos de 10MB (base64 viaja ~+33%).
 """
 import re, sys, base64, pathlib, subprocess, argparse, shutil, tempfile
 
