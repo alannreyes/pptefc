@@ -25,6 +25,11 @@ El producto final es **un archivo que viaja solo**:
 - **HTML auto-contenido** que se abre con doble-click (offline) y se puede **adjuntar a un correo**.
 - **PDF de calidad** (1280×720, una slide por página) para descarga/impresión.
 
+> **🔴 Entrada vs. salida.** El skill **lee** PPTX / PDF / HTML (para migrar presentaciones viejas a
+> identidad EFC), pero **genera solo HTML + PDF** — **NO produce `.pptx` editable**. Es deliberado: el
+> entregable viaja por correo y se ve idéntico en cualquier equipo. Si te piden un PowerPoint editable,
+> este no es el flujo.
+
 Para que el HTML viaje por correo y funcione sin internet, **TODO va embebido**:
 
 1. **CSS embebido**: leer `design-system/tokens.css` + `design-system/deck.css` (o `guide.css`

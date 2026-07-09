@@ -8,6 +8,9 @@ El producto final viaja solo:
   doble-click, funciona **offline** y se puede **adjuntar a un correo**.
 - **PDF de calidad** (1280×720, una slide por página).
 
+> **Entrada vs. salida:** lee PPTX/PDF/HTML (para migrar presentaciones viejas), pero **genera solo
+> HTML + PDF** — no produce `.pptx` editable.
+
 > Pensado para que cualquiera del equipo EFC o partner, con Claude Code instalado, arme
 > presentaciones profesionales sin infraestructura.
 
